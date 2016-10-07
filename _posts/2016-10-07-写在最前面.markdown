@@ -1,0 +1,19 @@
+---
+layout: post
+title: "写在最前面"
+subtitle: "Data Science 学习笔记"
+date: 2016-10-07
+author: Dykin
+category: Data Science
+tags: chinese luxun story
+finished: true
+---
+
+# 一个新的开始
+
+我就是想写点东西，为了把我学到的东西总结出来。这个类别是我在数据科学学习时的一些经验，希望对其他人可以有一些帮助，也希望我可以有一些提高。
+
+```py
+def fighting()
+```
+
