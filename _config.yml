@@ -17,6 +17,3 @@ skillstree: true # turn on or off the skills tree in about page
 # Build settings
 permalink: none
 markdown: kramdown
-
-
-categories: book1,book2,book3
