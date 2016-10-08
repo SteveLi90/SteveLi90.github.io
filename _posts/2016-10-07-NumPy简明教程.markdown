@@ -1,7 +1,3 @@
-#                        NumPy简明教程
-
-
-
 ---
 layout: post
 title: "NumPy简明教程"
@@ -12,6 +8,7 @@ category: Data Science
 tags: chinese luxun story
 finished: true
 ---
+#                        NumPy简明教程
 
 NumPy是Python的一个线性代数库，在数据科学研究和学习中扮演很重要的角色，这篇文章将带大家学习一些常用的功能，并且教会大家如何参考NumPy API。
 
@@ -48,7 +45,7 @@ np.array(my_list)
 my_matrix = [[1,2,3],[4,5,6],[7,8,9]] # 矩阵
 my_matrix
 
-np.array(my_matrix) 
+np.array(my_matrix)
 ```
 
 - ### 通过内置方法建立数组（Build-In）
@@ -335,10 +332,3 @@ arr.dtype
 
 dtype('int64')
 ```
-
-
-
-
-
-
-
