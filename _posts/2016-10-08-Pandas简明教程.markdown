@@ -12,7 +12,7 @@ finished: true
 
 #              Pandas简明教程
 Pandas 是一个很强大的数据科学分析工具，你可以把它当做是Excel。它是NumPy的延伸库。如果结合NumPy使用，基本上可以解决大多数据问题。
-我将从下面几个方面来介绍Pandas的一些常用功能和函数：
+我将从下面几个方面来介绍Pandas的一些常用功能和函数:
 
 * Series  级数
 * DataFrames   数据框
@@ -22,13 +22,13 @@ Pandas 是一个很强大的数据科学分析工具，你可以把它当做是E
 * Operations   运算操作0
 * Data Input and Output   数据输入输出
 
-注：
+注:
 
 *1，我最开始是用英语学习计算机的，所以有些英文的专业词汇我不知道怎么翻译更准确，本文中将保留这些专业名词。*
 *2， Pandas和R语言的一些功能其实很像。但是作为计算机人员我更愿意用Python将程序与数据分析结合起来。以后有时间的话我会写一个R语言的教程并且写一个R与Python功能比较的参考。*
 
 # Series
-Series 很像 NumPy中的Array。两者的区别是： Series会有一个一个axis labels（维度标签），这个axis labels不仅仅是数字，Series可以用这个作为索引。而array的只能用实数表示位置。另外Series中的数据可以是任何类型的object，但是array中只能是数字（[NumPy1.1版本数据类型](http://docs.scipy.org/doc/numpy/user/basics.types.html)）。从这个功能上看，Series有点像是Hash table。
+Series 很像 NumPy中的Array。两者的区别是: Series会有一个一个axis labels（维度标签），这个axis labels不仅仅是数字，Series可以用这个作为索引。而array的只能用实数表示位置。另外Series中的数据可以是任何类型的object，但是array中只能是数字（[NumPy1.1版本数据类型](http://docs.scipy.org/doc/numpy/user/basics.types.html)）。从这个功能上看，Series有点像是Hash table。
 
 让我们来看几个例子先:
 
@@ -65,7 +65,7 @@ pd.Series(data=my_list)
 ```python
 pd.Series(data=my_list,index=labels)   # Series主要的两个参数data在前，index在后
 ```
-output：
+output:
     a    10
     b    20
     c    30
@@ -87,7 +87,7 @@ pd.Series(my_list,labels)  # 在正式项目中最好指明哪个变量指向哪
 ```python
 pd.Series(arr)  # axis labels 默认为有理实数
 ```
-output：
+output:
     0    10
     1    20
     2    30
@@ -96,7 +96,7 @@ output：
 ```python
 pd.Series(arr,labels)
 ```
-output：
+output:
     a    10
     b    20
     c    30
@@ -107,19 +107,19 @@ Dictionary
 ```python
 pd.Series(d)
 ```
-output：
+output:
     a    10
     b    20
     c    30
     dtype: int64
 
 ### Series里的数据类型
-pandas Series 可以存放很多种数据类型：
+pandas Series 可以存放很多种数据类型:
 
 ```python
 pd.Series(data=labels)
 ```
-output：
+output:
     0    a
     1    b
     2    c
@@ -139,8 +139,8 @@ pd.Series([sum,print,len])
 
 ## 使用Index
 
-使用Series的关键在于使用index，Series包含两个关键参数：data和index，可见index的地位与data同等重要。学会使用index可以更快查找数据。
-下面几个例子将练习如何在Series中使用index，首先我们创建两个Series： ser1 & ser2
+使用Series的关键在于使用index，Series包含两个关键参数:data和index，可见index的地位与data同等重要。学会使用index可以更快查找数据。
+下面几个例子将练习如何在Series中使用index，首先我们创建两个Series: ser1 & ser2
 
 ```python
 ser1 = pd.Series([1,2,3,4],index = ['USA', 'Germany','USSR', 'Japan'])                                   
@@ -319,7 +319,8 @@ output:
 ```python
 df.drop('new',axis=1) #axis=1指的是列，axis=0指行，axis=2指二维表，以此类推
 ```
-output：
+output:
+
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  |
@@ -328,11 +329,13 @@ output：
 | D    | 0.188695  | -0.758872 | -0.933237 | 0.955057  |
 | E    | 0.190794  | 1.978757  | 2.605967  | 0.683509  |
 
-注意：inplace参数默认为false，即是否替换原数据。上一个drop没有设置inplace参数，所以df的数据，没有改变
+注意:inplace参数默认为false，即是否替换原数据。上一个drop没有设置inplace参数，所以df的数据，没有改变
+
 ```python
 df
 ```
-output：
+output:
+
 |      | W         | X         | Y         | Z         | new       |
 | ---- | --------- | --------- | --------- | --------- | --------- |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  | 3.614819  |
@@ -347,7 +350,7 @@ df.drop('new',axis=1,inplace=True)
 
 df
 ```
-output：
+output:
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  |
@@ -360,7 +363,7 @@ output：
 ```python
 df.drop('E',axis=0)
 ```
-output：
+output:
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  |
@@ -373,7 +376,7 @@ output：
 ```python
 df.loc['A']  # 选择行必须要用loc或者iloc函数
 ```
-output：
+output:
     W    2.706850
     X    0.628133
     Y    0.907969
@@ -384,7 +387,7 @@ output：
 ```python
 df.iloc[2]
 ```
-output：
+output:
     W   -2.018168
     X    0.740122
     Y    0.528813
@@ -396,7 +399,7 @@ output：
 ```python
 df.loc['B','Y']
 ```
-output：
+output:
     -0.84807698340363147
 注意啊，如果直接用 **df['B','Y']** 会报错，用 **df['Y','B']** 也会报错。所以必须用df.loc['B','Y']
 
@@ -426,7 +429,7 @@ df.loc[['B','X','A','Y']]
 ```python
 df
 ```
-output：
+output:
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  |
@@ -438,7 +441,7 @@ output：
 ```python
 df>0
 ```
-output：
+output:
 |      | W     | X     | Y     | Z     |
 | ---- | ----- | ----- | ----- | ----- |
 | A    | True  | True  | True  | True  |
@@ -450,7 +453,7 @@ output：
 ```python
 df[df>0]
 ```
-output：
+output:
 |      | W        | X        | Y        | Z        |
 | ---- | -------- | -------- | -------- | -------- |
 | A    | 2.706850 | 0.628133 | 0.907969 | 0.503826 |
@@ -473,7 +476,7 @@ df[df['W']>0]
 ```python
 df[df['W']>0]['Y']
 ```
-output：
+output:
     A    0.907969
     B   -0.848077
     D   -0.933237
@@ -484,7 +487,7 @@ output：
 df[df['W']>0][['Y','X']]
 # 注意啦！注意啦！此处是两个双中括号的并列关系，前面一个设定条件，后面一个设置需要选择的范围
 ```
-output：
+output:
 |      | Y         | X         |
 | ---- | --------- | --------- |
 | A    | 0.907969  | 0.628133  |
@@ -497,7 +500,7 @@ output：
 ```python
 df[(df['W']>0) & (df['Y'] > 1)]
 ```
-output：
+output:
 |      | W        | X        | Y        | Z        |
 | ---- | -------- | -------- | -------- | -------- |
 | E    | 0.190794 | 1.978757 | 2.605967 | 0.683509 |
@@ -507,7 +510,7 @@ output：
 ```python
 df
 ```
-output：
+output:
 |      | W         | X         | Y         | Z         | new       |
 | ---- | --------- | --------- | --------- | --------- | --------- |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  | 3.614819  |
@@ -537,7 +540,7 @@ df['States'] = newind
 
 df # 增加新的一列
 ```
-output：
+output:
 |      | W         | X         | Y         | Z         | States |
 | ---- | --------- | --------- | --------- | --------- | ------ |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  | CA     |
@@ -549,7 +552,7 @@ output：
 ```python
 df.set_index('States')
 ```
-output：
+output:
 |        | W         | X         | Y         | Z         |
 | ------ | --------- | --------- | --------- | --------- |
 | States |           |           |           |           |
@@ -562,7 +565,7 @@ output：
 ```python
 df
 ```
-output：
+output:
 |      | W         | X         | Y         | Z         | States |
 | ---- | --------- | --------- | --------- | --------- | ------ |
 | A    | 2.706850  | 0.628133  | 0.907969  | 0.503826  | CA     |
@@ -575,7 +578,7 @@ df.set_index('States',inplace=True)
 # 由此可见inplace参数将影响到原数据
 df
 ```
-output：
+output:
 |        | W         | X         | Y         | Z         |
 | ------ | --------- | --------- | --------- | --------- |
 | States |           |           |           |           |
@@ -643,7 +646,7 @@ df.xs(['G1',1])
 ```python
 df.xs(1,level='Num')
 ```
-output：
+output:
 |       | A         | B        |
 | ----- | --------- | -------- |
 | Group |           |          |
@@ -752,7 +755,7 @@ df
 | 4    | FB      | Carl    | 243   |
 | 5    | FB      | Sarah   | 350   |
 
-现在我们用groupBy()方法来进行分组，以下将增加一个 DataFrameGroupBy 的 object：
+现在我们用groupBy()方法来进行分组，以下将增加一个 DataFrameGroupBy 的 object:
 ```python
 df.groupby('Company')
 ```
@@ -773,7 +776,7 @@ by_comp.mean()
 | GOOG    | 160.0 |
 | MSFT    | 232.0 |
 
-等同于：
+等同于:
 ```python
 df.groupby('Company').mean()
 ```
@@ -784,7 +787,7 @@ df.groupby('Company').mean()
 | GOOG    | 160.0 |
 | MSFT    | 232.0 |
 
-标准差：
+标准差:
 ```python
 by_comp.std()
 ```
@@ -795,7 +798,7 @@ by_comp.std()
 | GOOG    | 56.568542  |
 | MSFT    | 152.735065 |
 
-最小值：
+最小值:
 ```python
 by_comp.min()
 ```
@@ -805,7 +808,7 @@ by_comp.min()
 | FB      | Carl    | 243   |
 | GOOG    | Charlie | 120   |
 | MSFT    | Amy     | 124   |
-最大值：
+最大值:
 ```python
 by_comp.max()
 ```
@@ -815,7 +818,7 @@ by_comp.max()
 | FB      | Sarah   | 350   |
 | GOOG    | Sam     | 200   |
 | MSFT    | Vanessa | 340   |
-计数：
+计数:
 ```python
 by_comp.count()
 ```
@@ -826,7 +829,7 @@ by_comp.count()
 | GOOG    | 2      | 2     |
 | MSFT    | 2      | 2     |
 
-描述分析（等同于数据库中的功能）：
+描述分析（等同于数据库中的功能）:
 ```python
 by_comp.describe()
 ```
@@ -859,7 +862,7 @@ by_comp.describe()
 | MSFT    | 75%   | 286.000000 |
 | MSFT    | max   | 340.000000 |
 
-注：由于markdown格式问题，我将公司名称全部写了出来，在编译器中公司名称其实只显示一个。
+注:由于markdown格式问题，我将公司名称全部写了出来，在编译器中公司名称其实只显示一个。
 
 ```python
 by_comp.describe().transpose() # 翻转
@@ -1379,7 +1382,7 @@ df.to_html('banklist.html') # 注意一定要扩展名
 一般不需要用pandas直接对数据库的数据进行读取。由于安全考虑和独立性的原因。
 但是pandas有 pandas.io.sql 模块可以对数据库进行数据读取，但是要有合适的API
 
-以下是一些常用的功能：
+以下是一些常用的功能:
 
 * read_sql_table(table_name, con[, schema, ...])
     读取数据库中的表到DF中
@@ -1390,7 +1393,7 @@ df.to_html('banklist.html') # 注意一定要扩展名
 * DataFrame.to_sql(name, con[, flavor, ...])
     将DF中的记录导入数据库
 
-以下给出一个简单的例子：
+以下给出一个简单的例子:
 
 
 ```python
