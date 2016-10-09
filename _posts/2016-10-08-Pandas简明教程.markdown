@@ -30,7 +30,8 @@ Pandas 是一个很强大的数据科学分析工具，你可以把它当做是E
 # Series
 Series 很像 NumPy中的Array。两者的区别是： Series会有一个一个axis labels（维度标签），这个axis labels不仅仅是数字，Series可以用这个作为索引。而array的只能用实数表示位置。另外Series中的数据可以是任何类型的object，但是array中只能是数字（[NumPy1.1版本数据类型](http://docs.scipy.org/doc/numpy/user/basics.types.html)）。从这个功能上看，Series有点像是Hash table。
 
-让我们来看几个例子先：
+让我们来看几个例子先:
+
 ```python
 import numpy as np
 import pandas as pd
