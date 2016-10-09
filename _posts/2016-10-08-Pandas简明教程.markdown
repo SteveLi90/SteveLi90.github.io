@@ -162,15 +162,18 @@ ser2 = pd.Series([1,2,5,4],index = ['USA', 'Germany','Italy', 'Japan'])
 ser2
 ```
 output:
+
     USA        1
     Germany    2
     Italy      5
     Japan      4
     dtype: int64
+
 ```python
 ser1['USA']
 ```
 output:
+
     1
 
 算数运算也会基于index进行
@@ -178,7 +181,8 @@ output:
 ```python
 ser1 + ser2
 ```
-output：
+output:
+
     Germany    4.0
     Italy      NaN
     Japan      8.0
@@ -186,12 +190,14 @@ output：
     USSR       NaN
     dtype: float64  # 一旦进行算数运算结果自动转换为float.并且结果根据index将序排列
 
+
 简单介绍一下，如果想向Series中增加数据，一般用set_value.后面的参数需要跟index和data。append和add方法只能加入另外一个一个Series。
 
 ```python
 ser2.set_value('Canada',7)
 ```
 output:
+
     USA        1
     Germany    2
     Italy      5
@@ -204,6 +210,7 @@ output:
 ser1 + ser2
 ```
 output:
+
     Canada     NaN
     China      NaN
     Germany    4.0
