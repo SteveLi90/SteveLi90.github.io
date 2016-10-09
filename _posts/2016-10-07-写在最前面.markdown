@@ -5,7 +5,7 @@ subtitle: "Data Science 学习笔记"
 date: 2016-10-07
 author: Dykin
 category: Data Science
-tags: Preface
+tags: chinese luxun story
 finished: true
 ---
 
