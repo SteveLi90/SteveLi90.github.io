@@ -935,6 +935,7 @@ df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2', 'A3'],
                         'D': ['D0', 'D1', 'D2', 'D3']},
                         index=[0, 1, 2, 3])
 ```
+
 ```python
 df2 = pd.DataFrame({'A': ['A4', 'A5', 'A6', 'A7'],
                         'B': ['B4', 'B5', 'B6', 'B7'],
@@ -942,6 +943,7 @@ df2 = pd.DataFrame({'A': ['A4', 'A5', 'A6', 'A7'],
                         'D': ['D4', 'D5', 'D6', 'D7']},
                          index=[4, 5, 6, 7])
 ```
+
 ```python
 df3 = pd.DataFrame({'A': ['A8', 'A9', 'A10', 'A11'],
                         'B': ['B8', 'B9', 'B10', 'B11'],
@@ -949,6 +951,7 @@ df3 = pd.DataFrame({'A': ['A8', 'A9', 'A10', 'A11'],
                         'D': ['D8', 'D9', 'D10', 'D11']},
                         index=[8, 9, 10, 11])
 ```
+
 ```python
 df1
 ```
@@ -1195,9 +1198,11 @@ df['col2'].unique()  # 找出唯一的值并返回array
 df['col2'].nunique()  # 返回唯一值的个数
 ```
     3
+
 ```python
 df['col2'].value_counts()  # 计数
 ```
+
     444    2
     555    1
     666    1
@@ -1269,10 +1274,13 @@ df
 df.columns
 ```
         Index(['col2', 'col3'], dtype='object')
+
 ```python
 df.index
 ```
+
         RangeIndex(start=0, stop=4, step=1)
+
 ### 排序
 
 ```python
@@ -1309,10 +1317,12 @@ df.isnull()
 | 1    | False | False |
 | 2    | False | False |
 | 3    | False | False |
+
 ```python
 # Drop rows with NaN Values
 df.dropna()
 ```
+
 |      | col2 | col3 |
 | ---- | ---- | ---- |
 | 0    | 444  | abc  |
