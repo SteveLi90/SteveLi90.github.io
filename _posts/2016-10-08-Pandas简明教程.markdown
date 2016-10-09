@@ -925,6 +925,7 @@ by_comp.describe().transpose()['GOOG']
 最基本的连接DF的方法，注意连接的DF维度一定要相同，可以通过axis参数来设置级联的位置，默认为0（在row的后面连接）
 
 首先我们先建立三个DF
+
 ```python
 import pandas as pd
 ```
