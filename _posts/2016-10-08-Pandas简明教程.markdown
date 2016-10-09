@@ -297,11 +297,11 @@ type(df['W'])
 ```
 output:
     pandas.core.series.Series
+
 ### 增加列
 ```python
 df['new'] = df['W'] + df['Y']
-```
-```python
+
 df
 ```
 output:
