@@ -1073,6 +1073,7 @@ pd.merge(left,right,how='inner',on='key')
 | 3    | A3   | B3   | K3   | C3   | D3   |
 
 下面我们使用key不同的两个表
+
 ```python
 left = pd.DataFrame({'key1': ['K0', 'K0', 'K1', 'K2'],
                      'key2': ['K0', 'K1', 'K0', 'K1'],
@@ -1084,6 +1085,7 @@ right = pd.DataFrame({'key1': ['K0', 'K1', 'K1', 'K2'],
                                   'C': ['C0', 'C1', 'C2', 'C3'],
                                   'D': ['D0', 'D1', 'D2', 'D3']})
 ```
+
 ```python
 pd.merge(left, right, on=['key1', 'key2'])
 ```
