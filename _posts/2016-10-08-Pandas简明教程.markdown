@@ -65,7 +65,7 @@ pd.Series(data=my_list)
 ```python
 pd.Series(data=my_list,index=labels)   # Series主要的两个参数data在前，index在后
 ```
-output:
+
     a    10
     b    20
     c    30
@@ -87,7 +87,7 @@ pd.Series(my_list,labels)  # 在正式项目中最好指明哪个变量指向哪
 ```python
 pd.Series(arr)  # axis labels 默认为有理实数
 ```
-output:
+
     0    10
     1    20
     2    30
@@ -96,7 +96,7 @@ output:
 ```python
 pd.Series(arr,labels)
 ```
-output:
+
     a    10
     b    20
     c    30
@@ -107,7 +107,7 @@ Dictionary
 ```python
 pd.Series(d)
 ```
-output:
+
     a    10
     b    20
     c    30
@@ -119,7 +119,7 @@ pandas Series 可以存放很多种数据类型:
 ```python
 pd.Series(data=labels)
 ```
-output:
+
     0    a
     1    b
     2    c
@@ -147,7 +147,7 @@ ser1 = pd.Series([1,2,3,4],index = ['USA', 'Germany','USSR', 'Japan'])
 
 ser1
 ```
-output:
+
 
     USA        1
     Germany    2
@@ -161,7 +161,7 @@ ser2 = pd.Series([1,2,5,4],index = ['USA', 'Germany','Italy', 'Japan'])
 ```python
 ser2
 ```
-output:
+
 
     USA        1
     Germany    2
@@ -172,7 +172,7 @@ output:
 ```python
 ser1['USA']
 ```
-output:
+
 
     1
 
@@ -181,7 +181,7 @@ output:
 ```python
 ser1 + ser2
 ```
-output:
+
 
     Germany    4.0
     Italy      NaN
@@ -196,7 +196,7 @@ output:
 ```python
 ser2.set_value('Canada',7)
 ```
-output:
+
 
     USA        1
     Germany    2
@@ -209,7 +209,7 @@ output:
 ```python
 ser1 + ser2
 ```
-output:
+
 
     Canada     NaN
     China      NaN
@@ -239,7 +239,7 @@ df = pd.DataFrame(randn(5,4),index='A B C D E'.split(),columns='W X Y Z'.split()
 
 df
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
@@ -256,7 +256,7 @@ output:
 ```python
 df['W']
 ```
-output:
+
 
     A    2.706850
     B    0.651118
@@ -295,7 +295,7 @@ DataFrame 的 Columns 就是 Series (DataFrame Columns are just Series)
 ```python
 type(df['W'])
 ```
-output:
+
     pandas.core.series.Series
 
 ### 增加列
@@ -304,7 +304,7 @@ df['new'] = df['W'] + df['Y']
 
 df
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         | new       |
 | ---- | --------- | --------- | --------- | --------- | --------- |
@@ -319,7 +319,7 @@ output:
 ```python
 df.drop('new',axis=1) #axis=1指的是列，axis=0指行，axis=2指二维表，以此类推
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
@@ -334,7 +334,7 @@ output:
 ```python
 df
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         | new       |
 | ---- | --------- | --------- | --------- | --------- | --------- |
@@ -351,7 +351,7 @@ df.drop('new',axis=1,inplace=True)
 
 df
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
@@ -366,7 +366,7 @@ output:
 ```python
 df.drop('E',axis=0)
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         |
 | ---- | --------- | --------- | --------- | --------- |
@@ -380,7 +380,7 @@ output:
 ```python
 df.loc['A']  # 选择行必须要用loc或者iloc函数
 ```
-output:
+
 
     W    2.706850
     X    0.628133
@@ -393,7 +393,7 @@ output:
 ```python
 df.iloc[2]
 ```
-output:
+
 
     W   -2.018168
     X    0.740122
@@ -406,7 +406,7 @@ output:
 ```python
 df.loc['B','Y']
 ```
-output:
+
 
     -0.84807698340363147
 
@@ -415,7 +415,7 @@ output:
 ```python
 df.loc[['A','B'],['W','Y']]
 ```
-OUTPUT:
+
 
 |      | W        | Y         |
 | ---- | -------- | --------- |
@@ -491,7 +491,7 @@ df[df['W']>0]
 ```python
 df[df['W']>0]['Y']
 ```
-output:
+
     A    0.907969
     B   -0.848077
     D   -0.933237
@@ -502,7 +502,7 @@ output:
 df[df['W']>0][['Y','X']]
 # 注意啦！注意啦！此处是两个双中括号的并列关系，前面一个设定条件，后面一个设置需要选择的范围
 ```
-output:
+
 
 |      | Y         | X         |
 | ---- | --------- | --------- |
@@ -516,7 +516,7 @@ output:
 ```python
 df[(df['W']>0) & (df['Y'] > 1)]
 ```
-output:
+
 
 |      | W        | X        | Y        | Z        |
 | ---- | -------- | -------- | -------- | -------- |
@@ -528,7 +528,7 @@ output:
 ```python
 df
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         | new       |
 | ---- | --------- | --------- | --------- | --------- | --------- |
@@ -560,7 +560,7 @@ df['States'] = newind
 
 df # 增加新的一列
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         | States |
 | ---- | --------- | --------- | --------- | --------- | ------ |
@@ -573,7 +573,7 @@ output:
 ```python
 df.set_index('States')
 ```
-output:
+
 
 |        | W         | X         | Y         | Z         |
 | ------ | --------- | --------- | --------- | --------- |
@@ -587,7 +587,7 @@ output:
 ```python
 df
 ```
-output:
+
 
 |      | W         | X         | Y         | Z         | States |
 | ---- | --------- | --------- | --------- | --------- | ------ |
@@ -602,7 +602,7 @@ df.set_index('States',inplace=True)
 # 由此可见inplace参数将影响到原数据
 df
 ```
-output:
+
 
 |        | W         | X         | Y         | Z         |
 | ------ | --------- | --------- | --------- | --------- |
@@ -634,7 +634,7 @@ hier_index
 df = pd.DataFrame(np.random.randn(6,2),index=hier_index,columns=['A','B'])
 df
 ```
-output:
+
 
 |       |      | A         | B         |
 | ----- | ---- | --------- | --------- |
@@ -650,7 +650,7 @@ output:
 ```python
 df.xs('G1')
 ```
-output:
+
 
 |      | A         | B         |
 | ---- | --------- | --------- |
@@ -671,7 +671,7 @@ df.xs(['G1',1])
 ```python
 df.xs(1,level='Num')
 ```
-output:
+
 |       | A         | B        |
 | ----- | --------- | -------- |
 | Group |           |          |
