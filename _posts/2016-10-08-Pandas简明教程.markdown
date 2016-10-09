@@ -697,6 +697,7 @@ df = pd.DataFrame({'A':[1,2,np.nan],
 
 df
 ```
+
 |      | A    | B    | C    |
 | ---- | ---- | ---- | ---- |
 | 0    | 1.0  | 5.0  | 1    |
@@ -706,12 +707,14 @@ df
 ```python
 df.dropna()  # 将含有nan值的rows一同删除
 ```
+
 |      | A    | B    | C    |
 | ---- | ---- | ---- | ---- |
 | 0    | 1.0  | 5.0  | 1    |
 ```python
 df.dropna(axis=1) # 将含有nan值的columns一同删除
 ```
+
 |      | C    |
 | ---- | ---- |
 | 0    | 1    |
@@ -722,6 +725,7 @@ df.dropna(axis=1) # 将含有nan值的columns一同删除
 df.dropna(thresh=2) # 这个很有用， drop掉所有含有有效数据（除NaN外）小于thresh的Series
 # 还有个how参数，需要指定是drop掉全为NaN的行还是drop掉出现NaN的行，这我就不给出例子了
 ```
+
 |      | A    | B    | C    |
 | ---- | ---- | ---- | ---- |
 | 0    | 1.0  | 5.0  | 1    |
@@ -730,6 +734,7 @@ df.dropna(thresh=2) # 这个很有用， drop掉所有含有有效数据（除Na
 ```python
 df.fillna(value='FILL VALUE') # 这个不用介绍了吧
 ```
+
 |      | A          | B          | C    |
 | ---- | ---------- | ---------- | ---- |
 | 0    | 1          | 5          | 1    |
@@ -739,6 +744,7 @@ df.fillna(value='FILL VALUE') # 这个不用介绍了吧
 ```python
 df['A'].fillna(value=df['A'].mean())
 ```
+
     0    1.0
     1    2.0
     2    1.5
@@ -747,6 +753,7 @@ df['A'].fillna(value=df['A'].mean())
 ```python
 df.fillna(value=df['B'].mean())
 ```
+
 |      | A    | B    | C    |
 | ---- | ---- | ---- | ---- |
 | 0    | 1.0  | 5.0  | 1    |
@@ -771,6 +778,7 @@ df = pd.DataFrame(data)
 
 df
 ```
+
 |      | Company | Person  | Sales |
 | ---- | ------- | ------- | ----- |
 | 0    | GOOG    | Sam     | 200   |
@@ -794,6 +802,7 @@ by_comp = df.groupby("Company")
 ```python
 by_comp.mean()
 ```
+
 |         | Sales |
 | ------- | ----- |
 | Company |       |
@@ -805,6 +814,7 @@ by_comp.mean()
 ```python
 df.groupby('Company').mean()
 ```
+
 |         | Sales |
 | ------- | ----- |
 | Company |       |
@@ -816,6 +826,7 @@ df.groupby('Company').mean()
 ```python
 by_comp.std()
 ```
+
 |         | Sales      |
 | ------- | ---------- |
 | Company |            |
@@ -827,6 +838,7 @@ by_comp.std()
 ```python
 by_comp.min()
 ```
+
 |         | Person  | Sales |
 | ------- | ------- | ----- |
 | Company |         |       |
@@ -837,6 +849,7 @@ by_comp.min()
 ```python
 by_comp.max()
 ```
+
 |         | Person  | Sales |
 | ------- | ------- | ----- |
 | Company |         |       |
@@ -847,6 +860,7 @@ by_comp.max()
 ```python
 by_comp.count()
 ```
+
 |         | Person | Sales |
 | ------- | ------ | ----- |
 | Company |        |       |
@@ -892,6 +906,7 @@ by_comp.describe()
 ```python
 by_comp.describe().transpose() # 翻转
 ```
+
 | Company | FB    |       |           |       |        |       |        |       |       | GOOG  |      |       |       |       |       |            | MSFT  |       |       |       |       |
 | ------- | ----- | ----- | --------- | ----- | ------ | ----- | ------ | ----- | ----- | ----- | ---- | ----- | ----- | ----- | ----- | ---------- | ----- | ----- | ----- | ----- | ----- |
 |         | count | mean  | std       | min   | 25%    | 50%   | 75%    | max   | count | mean  | …    | 75%   | max   | count | mean  | std        | min   | 25%   | 50%   | 75%   | max   |
@@ -900,6 +915,7 @@ by_comp.describe().transpose() # 翻转
 ```python
 by_comp.describe().transpose()['GOOG']
 ```
+
 也可以翻转一个公司的数据，我就不打印出来了
 
 # Merging, Joining, and Concatenating（归并，连接，级联）
@@ -936,24 +952,29 @@ df3 = pd.DataFrame({'A': ['A8', 'A9', 'A10', 'A11'],
 ```python
 df1
 ```
+
 |      | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | C0   | D0   |
 | 1    | A1   | B1   | C1   | D1   |
 | 2    | A2   | B2   | C2   | D2   |
 | 3    | A3   | B3   | C3   | D3   |
+
 ```python
 df2
 ```
+
 |      | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- |
 | 4    | A4   | B4   | C4   | D4   |
 | 5    | A5   | B5   | C5   | D5   |
 | 6    | A6   | B6   | C6   | D6   |
 | 7    | A7   | B7   | C7   | D7   |
+
 ```python
 df3
 ```
+
 |      | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- |
 | 8    | A8   | B8   | C8   | D8   |
@@ -982,6 +1003,7 @@ pd.concat([df1,df2,df3])
 ```python
 pd.concat([df1,df2,df3],axis=1) # 通过column相连
 ```
+
 |      | A    | B    | C    | D    | A    | B    | C    | D    | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | C0   | D0   | NaN  | NaN  | NaN  | NaN  | NaN  | NaN  | NaN  | NaN  |
@@ -1015,15 +1037,18 @@ right = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'],
 ```python
 left
 ```
+
 |      | A    | B    | key  |
 | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | K0   |
 | 1    | A1   | B1   | K1   |
 | 2    | A2   | B2   | K2   |
 | 3    | A3   | B3   | K3   |
+
 ```python
 right
 ```
+
 |      | C    | D    | key  |
 | ---- | ---- | ---- | ---- |
 | 0    | C0   | D0   | K0   |
@@ -1034,12 +1059,14 @@ right
 ```python
 pd.merge(left,right,how='inner',on='key')
 ```
+
 |      | A    | B    | key  | C    | D    |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | K0   | C0   | D0   |
 | 1    | A1   | B1   | K1   | C1   | D1   |
 | 2    | A2   | B2   | K2   | C2   | D2   |
 | 3    | A3   | B3   | K3   | C3   | D3   |
+
 下面我们使用key不同的两个表
 ```python
 left = pd.DataFrame({'key1': ['K0', 'K0', 'K1', 'K2'],
@@ -1055,22 +1082,27 @@ right = pd.DataFrame({'key1': ['K0', 'K1', 'K1', 'K2'],
 ```python
 pd.merge(left, right, on=['key1', 'key2'])
 ```
+
 |      | A    | B    | key1 | key2 | C    | D    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | K0   | K0   | C0   | D0   |
 | 1    | A2   | B2   | K1   | K0   | C1   | D1   |
 | 2    | A2   | B2   | K1   | K0   | C2   | D2   |
+
 ```python
 pd.merge(right,left,  on=['key1', 'key2'])  # 注意左右交换的结果
 ```
+
 |      | C    | D    | key1 | key2 | A    | B    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | C0   | D0   | K0   | K0   | A0   | B0   |
 | 1    | C1   | D1   | K1   | K0   | A2   | B2   |
 | 2    | C2   | D2   | K1   | K0   | A2   | B2   |
+
 ```python
 pd.merge(left, right, how='outer', on=['key1', 'key2'])
 ```
+
 |      | A    | B    | key1 | key2 | C    | D    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | K0   | K0   | C0   | D0   |
@@ -1083,15 +1115,18 @@ pd.merge(left, right, how='outer', on=['key1', 'key2'])
 ```python
 pd.merge(left, right, how='right', on=['key1', 'key2'])
 ```
+
 |      | A    | B    | key1 | key2 | C    | D    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | K0   | K0   | C0   | D0   |
 | 1    | A2   | B2   | K1   | K0   | C1   | D1   |
 | 2    | A2   | B2   | K1   | K0   | C2   | D2   |
 | 3    | NaN  | NaN  | K2   | K0   | C3   | D3   |
+
 ```python
 pd.merge(left, right, how='left', on=['key1', 'key2'])
 ```
+
 |      | A    | B    | key1 | key2 | C    | D    |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 0    | A0   | B0   | K0   | K0   | C0   | D0   |
@@ -1115,6 +1150,7 @@ right = pd.DataFrame({'C': ['C0', 'C2', 'C3'],
 ```python
 left.join(right)
 ```
+
 |      | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- |
 | K0   | A0   | B0   | C0   | D0   |
@@ -1124,6 +1160,7 @@ left.join(right)
 ```python
 left.join(right, how='outer')
 ```
+
 |      | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- |
 | K0   | A0   | B0   | C0   | D0   |
@@ -1140,6 +1177,7 @@ import pandas as pd
 df = pd.DataFrame({'col1':[1,2,3,4],'col2':[444,555,666,444],'col3':['abc','def','ghi','xyz']})
 df.head()
 ```
+
 |      | col1 | col2 | col3 |
 | ---- | ---- | ---- | ---- |
 | 0    | 1    | 444  | abc  |
@@ -1175,6 +1213,7 @@ newdf = df[(df['col1']>2) & (df['col2']==444)]
 ```python
 newdf
 ```
+
 |      | col1 | col2 | col3 |
 | ---- | ---- | ---- | ---- |
 | 3    | 4    | 444  | xyz  |
@@ -1187,6 +1226,7 @@ def times2(x):
 ```python
 df['col1'].apply(times2)  # 通过apply对DF使用自定义函数
 ```
+
     0    2
     1    4
     2    6
@@ -1196,6 +1236,7 @@ df['col1'].apply(times2)  # 通过apply对DF使用自定义函数
 ```python
 df['col3'].apply(len)
 ```
+
     0    3
     1    3
     2    3
@@ -1211,10 +1252,10 @@ df['col1'].sum()
 
 ```python
 del df['col1']
-```
-```python
+
 df
 ```
+
 |      | col2 | col3 |
 | ---- | ---- | ---- |
 | 0    | 444  | abc  |
@@ -1237,6 +1278,7 @@ df.index
 ```python
 df
 ```
+
 |      | col2 | col3 |
 | ---- | ---- | ---- |
 | 0    | 444  | abc  |
@@ -1247,6 +1289,7 @@ df
 ```python
 df.sort_values(by='col2') #inplace=False 默认
 ```
+
 |      | col2 | col3 |
 | ---- | ---- | ---- |
 | 0    | 444  | abc  |
@@ -1259,6 +1302,7 @@ df.sort_values(by='col2') #inplace=False 默认
 ```python
 df.isnull()
 ```
+
 |      | col2  | col3  |
 | ---- | ----- | ----- |
 | 0    | False | False |
@@ -1287,15 +1331,18 @@ df = pd.DataFrame({'col1':[1,2,3,np.nan],
                    'col3':['abc','def','ghi','xyz']})
 df.head()
 ```
+
 |      | col1 | col2  | col3 |
 | ---- | ---- | ----- | ---- |
 | 0    | 1.0  | NaN   | abc  |
 | 1    | 2.0  | 555.0 | def  |
 | 2    | 3.0  | 666.0 | ghi  |
 | 3    | NaN  | 444.0 | xyz  |
+
 ```python
 df.fillna('FILL')
 ```
+
 |      | col1 | col2 | col3 |
 | ---- | ---- | ---- | ---- |
 | 0    | 1    | FILL | abc  |
@@ -1315,6 +1362,7 @@ df = pd.DataFrame(data)
 
 df
 ```
+
 |      | A    | B    | C    | D    |
 | ---- | ---- | ---- | ---- | ---- |
 | 0    | foo  | one  | x    | 1    |
@@ -1327,6 +1375,7 @@ df
 ```python
 df.pivot_table(values='D',index=['A', 'B'],columns=['C'])
 ```
+
 |      | C    | x    | y    |
 | ---- | ---- | ---- | ---- |
 | A    | B    |      |      |
@@ -1349,6 +1398,7 @@ import pandas as pd
 df = pd.read_csv('example') # 文件最好在相同目录下，不在的话需要指定文件路径
 df
 ```
+
 |      | a    | b    | c    | d    |
 | ---- | ---- | ---- | ---- | ---- |
 | 0    | 0    | 1    | 2    | 3    |
@@ -1367,6 +1417,7 @@ Pandas 仅仅针对Data进行输入，不能输入图像或者公式，否则会
 ```python
 pd.read_excel('Excel_Sample.xlsx',sheetname='Sheet1') # 注意需要指明哪个sheet
 ```
+
 |      | a    | b    | c    | d    |
 | ---- | ---- | ---- | ---- | ---- |
 | 0    | 0    | 1    | 2    | 3    |
@@ -1430,6 +1481,7 @@ sql_df = pd.read_sql('data',con=engine)
 
 sql_df
 ```
+
 |      | index | a    | b    | c    | d    |
 | ---- | ----- | ---- | ---- | ---- | ---- |
 | 0    | 0     | 0    | 1    | 2    | 3    |
