@@ -144,16 +144,17 @@ pd.Series([sum,print,len])
 
 ```python
 ser1 = pd.Series([1,2,3,4],index = ['USA', 'Germany','USSR', 'Japan'])                                   
-```
-```python
+
 ser1
 ```
 output:
+
     USA        1
     Germany    2
     USSR       3
     Japan      4
     dtype: int64
+
 ```python
 ser2 = pd.Series([1,2,5,4],index = ['USA', 'Germany','Italy', 'Japan'])                                   
 ```
