@@ -1,0 +1,176 @@
+---
+layout: post
+title: "MySQL的安装及基本配置"
+subtitle: ""
+date: 2016-10-10
+author: Dykin
+category: Preface
+tags: Database MySQL
+finished: true
+---
+
+# MySQL的安装及基本配置
+
+## 安装MySQL
+
+研究数据当然离不开数据库啦~~我是从数据库起家的，所以我会介绍一些数据库在数据科学中的一些作用。我用了很多DB2，DB2确实很不错，但是作为起步我还是选择MySQL。以后我想我会写一些关于DB2的文章，之前DB2大多在MainFrame上使用。
+OK，长话短说。一般设置一个可用数据库（优化不在这里讨论），可用遵循以下几个步骤：
+
+  安装 Install MySQL
+  允许远程访问 Allow remote access
+  开始服务 Start the MySQL service
+  设置根密码 Set the root password
+  查看用户 View users
+  用户主机 User hosts
+  匿名用户 Anonymous users
+  建立数据库 Create a database
+  增加数据库用户 Add a database user
+  设置用户权限 Grant database user permissions
+
+### Install MySQL
+
+直接看指令：
+```
+sudo apt-get update
+sudo apt-get install mysql-server
+```
+安装完成后执行以下命令进行安全设置，当然在安装期间系统会要求您输入root密码，root密码可以为空。以后每次进行安全设置都可以运行以下脚本。
+
+/usr/bin/mysql_secure_installation
+
+### Allow remote access
+
+你可以通过以上命令设置是否允许用户远程访问，但是对于本地防火墙的话需要开启3306端口作为MySQL的远程访问端口，当然你可以通过命令或者修改my.cnf 来修改端口。
+
+```
+sudo iptables -I INPUT -p tcp --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -I OUTPUT -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCEPT
+```
+
+### Start the MySQL service
+
+既然安装好了我们先进入MySQL试试。首先要启动MySQL服务。
+```
+sudo service mysql start
+```
+
+#### Launch at reboot
+
+为了避免每次重启之后要再手动启动MySQL服务。我们可以把它加到随系统启动的服务列表中
+
+```
+sudo /usr/sbin/update-rc.d mysql defaults
+```
+
+#### Start the mysql shell
+
+好啦，下面我们开始启动MySQL
+
+```
+mysql -u root -p
+```
+
+最后说一下关于MySQL启动的几个参数，一条完整的启动命令像这样 ：
+```
+mysql -h localhost -u root -p
+```
+
+其中-h 是host地址，本地的话是localhost，远程是IP地址，-u是MySQL用户，-p是密码。
+
+### Set the root password
+
+有很多种方法设置密码，包括后面的设置用户也可以用。这里我介绍如何在数据库内部通过命令设置密码。
+
+```
+UPDATE mysql.user SET Password = PASSWORD(‘password’) WHERE User = ‘root’;
+```
+
+我们可以发现密码储存在了mysql数据库中的user table中。所以要求修改者必须要有管理员权限。
+
+接下来我们刷新下privileges：
+
+```
+FLUSH PRIVILEGES;
+```
+
+###  View users
+
+如上所述：我们在mysql.user中查看所有用户
+
+```
+select user,host from mysql.user;
+```
+
+其中password filed是加密的，所以查看没有意义。
+
+```
+show grants for 'root'@'%';
+```
+
+然后用这条命令可以查看用户的权限，其中百分号代表所有位置（本地和远程）的权限。
+
+### Create a database
+
+```
+CREATE DATABASE demodb;
+```
+
+### Add a database user
+
+既然知道了user表可以对用户进行操作，我们可以直接在表中添加用户字段，但是只有系统管理员才可以，不建议这么做
+
+```
+INSERT INTO mysql.user (User,Host,Password) VALUES('demouser','localhost',PASSWORD('demopassword'));
+```
+
+一般我们用下面这条：
+
+```
+CREATE USER 'demouser'@'localhost' IDENTIFIED BY 'demopassword';
+FLUSH PRIVILEGES;
+```
+
+### Grant database user permissions
+
+接下来设置用户权限。注意权限包括用户权限和数据库和表的访问权限，目前我们只针对用户权限，数据库和表的权限我们在安全或者优化的部分再介绍
+
+```
+GRANT ALL PRIVILEGES ON demodb.* to demouser@localhost;
+FLUSH PRIVILEGES;
+```
+
+以下是不同的用户权限介绍：
+
+ALL PRIVILEGES- as we saw previously, this would allow a MySQL user all access to a designated database (or if no database is selected, across the system)
+CREATE- allows them to create new tables or databases
+DROP- allows them to them to delete tables or databases
+DELETE- allows them to delete rows from tables
+INSERT- allows them to insert rows into tables
+SELECT- allows them to use the Select command to read through databases
+UPDATE- allow them to update table rows
+GRANT OPTION- allows them to grant or remove other users' privileges
+
+一般来说：
+
+```
+增加用户权限：
+
+GRANT [type of permission] ON [database name].[table name] TO ‘[username]’@'localhost’;
+```
+
+```
+解除用户权限：
+
+REVOKE [type of permission] ON [database name].[table name] FROM ‘[username]’@‘localhost’;
+```
+
+```
+删除用户：
+
+DROP USER ‘demo’@‘localhost’;
+```
+
+删除用户：
+DROP USER ‘demo’@‘localhost’;
+
+## 配置MySQL
