@@ -1,0 +1,40 @@
+---
+layout: post
+title: "写在MySQL前面"
+subtitle: ""
+date: 2016-10-10
+author: Dykin
+category: Preface
+tags: Database MySQL
+finished: true
+---
+
+写在MySQL前面
+
+这是一些关于MySQL的文章，我没有长时间进行MySQL运维操作的经验，但是基本的一些经验还是有的，所以我主要是转载一些别人写的文章，再加上一些自己的实验和注解完成这一个系列。
+
+我师从Andrew Mackey老师，他是做数据出身，我打算也将沿着这条路走下去。我尽量做到一天更新一篇。在这里强烈推荐一篇论文，是由三位教授共同完成的。
+
+[Architecture of Database System](http://db.cs.berkeley.edu/papers/fntdb07-architecture.pdf)
+
+大部分关于关系数据库书籍或多或少都会用到这篇论文的思想。
+
+这里把一些原文的参考列在这里，如果大家有什么不清楚的地方可以参考原文或MySQL手册。
+
+作者：李振良
+网址：http://lizhenliang.blog.51cto.com/7876557/1657465
+
+作者：pangge
+网址：http://pangge.blog.51cto.com/6013757/1291909
+
+出处：桦仔
+链接：http://www.cnblogs.com/lyhabc/p/3838764.html
+
+出处：YY哥的博客
+链接：http://www.cnblogs.com/hustcat/archive/2009/10/18/1585626.html
+
+来源：博客园
+来源链接：http://database.51cto.com/art/201006/204585_all.htm
+
+来源： iSystemAdmin   《A Simple Shell Script to Backup MySQL Database》
+译文链接：http://article.yeeyan.org/view/7332/261672
