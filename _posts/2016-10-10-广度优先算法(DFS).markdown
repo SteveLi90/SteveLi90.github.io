@@ -1,0 +1,154 @@
+---
+layout: post
+title: "广度优先搜索算法（Breadth-First-Search）"
+subtitle: "Breadth-First-Search"
+date: 2016-10-10
+author: Dykin
+category: AI
+tags: Algorithm
+finished: true
+---
+广度优先搜索算法（BFS）
+今天我们来介绍一下一个简单的图形算法，广度优先搜索（BFS)。这是一种图形搜索算法，从根节点开始，横向的遍历所有节点。
+
+首先我们需要建立一个叫做Vertex 的model（一般常用Node），用作节点。里面包含三个成员变量：数值（int），是否访问过（boolean），和一个子节点的List。
+我们先来看代码。
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Vertex {
+
+  // setup private variable for Vertex model
+	private int data;
+	private boolean visited;
+	private List<Vertex> neighbourList;
+
+	public Vertex(int data) {
+		this.data = data;
+		this.neighbourList = new ArrayList<>();
+	}
+
+  // add the son node list for model
+	public void addNeighbour(Vertex vertex) {
+		this.neighbourList.add(vertex);
+	}
+
+	public int getData() {
+		return data;
+	}
+
+	public void setData(int data) {
+		this.data = data;
+	}
+
+	public boolean isVisited() {
+		return visited;
+	}
+
+	public void setVisited(boolean visited) {
+		this.visited = visited;
+	}
+
+	public List<Vertex> getNeighbourList() {
+		return neighbourList;
+	}
+
+	public void setNeighbourList(List<Vertex> neighbourList) {
+		this.neighbourList = neighbourList;
+	}
+
+	// important override toString to print
+	@Override
+	public String toString() {
+		return ""+this.data;
+	}
+}
+```
+接下来我们要写算法部分。我们需要一个过渡容器来存放Vertex。这个过渡容器我用Queue，因为Queue的特点是先进先出。
+首先我们将根节点加入Queue，然后读取他的子节点列表，并且将子节点列表中的节点加入Queue。当遍历子节点时候，在读取每个节点的子节点列表加入Queue。这样就实现了横向遍历。如图：
+
+```
+    1
+  2   3
+456  7 8
+
+Queue： 1 23 456 78
+
+当读取到2 的时候将2 的子节点4，5，6加入Queue，当读取到3的时候将3的子节点7，8加入Queue
+```
+
+代码如下：
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BreadthFirstSearch {
+
+	public void bfs(Vertex root) {
+
+		Queue<Vertex> queue = new LinkedList<>();
+
+		root.setVisited(true);
+		queue.add(root);
+
+		while( !queue.isEmpty()) {
+
+			// check each node neighbours, print node, add neighbours list at the end of queue
+
+			Vertex actualVertex = queue.remove();
+			System.out.print(actualVertex+"-");
+
+			for(Vertex v : actualVertex.getNeighbourList()) {
+				if( !v.isVisited()) {
+					v.setVisited(true);
+					queue.add(v);
+				}
+			}
+		}
+	}
+
+}
+```
+这样我们就完成了DFS的算法部分，最后只要加入节点执行就可以啦！！
+
+```java
+public class Run {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		BreadthFirstSearch bfstest = new BreadthFirstSearch();
+
+		Vertex vertex1 = new Vertex(1);
+		Vertex vertex2 = new Vertex(2);
+		Vertex vertex3 = new Vertex(3);
+		Vertex vertex4 = new Vertex(4);
+		Vertex vertex5 = new Vertex(5);
+		Vertex vertex6 = new Vertex(6);
+		Vertex vertex7 = new Vertex(7);
+
+    /*
+           1
+        3     5
+      4 6    2 7
+    */
+		vertex1.addNeighbour(vertex3);
+		vertex1.addNeighbour(vertex5);
+		vertex3.addNeighbour(vertex4);
+		vertex3.addNeighbour(vertex6);
+		vertex5.addNeighbour(vertex2);
+		vertex5.addNeighbour(vertex7);
+
+		bfstest.bfs(vertex1);
+	}
+}
+```
+运行结果：
+
+```
+1-3-5-4-6-2-7-
+```
+这样我们就完成了横向的遍历！！
