@@ -30,10 +30,12 @@ OK，长话短说。一般设置一个可用数据库（优化不在这里讨论
 ### Install MySQL
 
 直接看指令：
+
 ```
 sudo apt-get update
 sudo apt-get install mysql-server
 ```
+
 安装完成后执行以下命令进行安全设置，当然在安装期间系统会要求您输入root密码，root密码可以为空。以后每次进行安全设置都可以运行以下脚本。
 
 /usr/bin/mysql_secure_installation
@@ -50,6 +52,7 @@ sudo iptables -I OUTPUT -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCE
 ### Start the MySQL service
 
 既然安装好了我们先进入MySQL试试。首先要启动MySQL服务。
+
 ```
 sudo service mysql start
 ```
@@ -71,6 +74,7 @@ mysql -u root -p
 ```
 
 最后说一下关于MySQL启动的几个参数，一条完整的启动命令像这样 ：
+
 ```
 mysql -h localhost -u root -p
 ```
