@@ -8,7 +8,7 @@ Just for using, not showing off.
 Nice Blog  [![Build Status](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/steveli90)  [![release](https://img.shields.io/github/release/steveli90.svg)](https://github.com/steveli90/releases)
 ========
 
-A Simple Jekyll Blog Theme.
+Dykin's Blog
 
 [![Demo](https://img.shields.io/badge/Demo-Nice Blog-green.svg)](http://benjaminblog.ml)
 
