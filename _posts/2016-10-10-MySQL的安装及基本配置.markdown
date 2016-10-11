@@ -4,7 +4,7 @@ title: "MySQL的安装及基本配置"
 subtitle: ""
 date: 2016-10-10
 author: Dykin
-category: Preface
+category: Database
 tags: Database MySQL
 finished: true
 ---
@@ -174,3 +174,140 @@ DROP USER ‘demo’@‘localhost’;
 DROP USER ‘demo’@‘localhost’;
 
 ## 配置MySQL
+
+MySQL 的配置文件主要安装在此路径之下
+
+```
+/etc/mysql
+```
+
+我们可以用MySQL自带的帮助命令寻找到所需要的帮助文件
+
+```
+mysqld --help --verbase
+```
+
+## my.cnf & mysqld.cnf
+
+这是很重要的一个MySQL的配置文件，建议修改之前最好做好备份。
+之前版本的配置会放在my.cnf中，但是有的也会放在mysqld.cnf中。我使用的是Ubuntu Linux16.06版本。通过apt-get命令安装的server。设置在
+
+```
+/etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+这是因为服务器版本不同所造成的配置文件位置不一样，但是里面内容都是相似的。
+
+### 配置用户组
+
+在 [client] 或者 [mysqld] 参数上可以噢诶之用户组，未来的cluster配置将会详细介绍
+注意client 用来配置MySQL client，mysqld用来配置 MySQL server。
+
+### Log files
+MySQL 默认的日志文件的位置在：
+
+```
+/var/log/mysql
+```
+
+如果你找不到日志文件，在my.cnf中会有日志文件的位置
+
+```
+log_error = /var/log/mysql/error.log
+```
+
+### 网络设置
+MySQL默认端口是3306，如果你想改变端口。需要在my.cnf中改变以下设置
+
+```
+[client]
+port = 3306
+
+[mysqld]
+port = 3306
+```
+
+另外，如果你使用MySQLcluster，需要将IP地址由127.0.0.1 改为本机的IP地址
+
+```
+[mysqld]
+bind-address = 127.0.0.1
+```
+
+## mysqld and mysqld_safe
+
+有两种设置MySQL服务器的命令，mysqld 和 mysqld_safe, 两个命令很像，区别是mysqld_safe 自动开启了一些安全的功能，这样有助于当系统崩溃时候恢复和备份。
+
+另外。mysqld和mysqld_safe同时可以进入mysqld section. 但是只有mysqld_safe可以进入mysqld_safe section。MySQL自动开启了mysqld_safe section。
+
+## mysqladmin
+
+这是一个很好的MySQL自带的系统管理工具。这里不介绍了，各位可以参考MySQL手册
+[mysqladmin](http://dev.mysql.com/doc/refman/5.7/en/mysqladmin.html)
+
+## Backups
+
+备份包括备份服务器配置，日志和数据库。可以用直接copy配置文件和mysqldump两种方法
+
+### file copy
+
+默认的MySQL数据库存放在以下路径：
+
+```
+/var/lib/mysql
+```
+
+为了避免在你备份时数据库进行读写操作造成死锁，我们先对数据库加只读锁，然后解锁
+
+```
+mysql -u root -p -e "FLUSH TABLES WITH READ LOCK;"
+# when you finish backup
+mysql -u root -p -e "UNLOCK TABLES;"
+```
+
+**可以使用 “ -e ” 在Linux中运行MySQL命令**
+
+```
+mysql -u root -p"password" -e "FLUSH TABLES WITH READ LOCK;"
+mysql -u root -p"password" -e "UNLOCK TABLES;"
+```
+
+### mysqldump
+
+mysqldump是一个很好的马上要去了备份工具，mysqldump将会生成一份SQL语句文件将数据库备份。
+你也可以将数据库备份成csv或者xml格式的文件。内容都是一样的。
+
+```
+mysqldump -u root -p demodb > dbbackup.sql
+```
+
+### Restore from mysqldump
+
+可以用mysqldump工具来恢复备份，但是我喜欢用mysql命令直接恢复备份去另一个数据库。
+
+```
+mysql -u root -p demodb < dbbackup.sql
+```
+
+注意，这里的恢复是将备份添加到现有的数据库中，也就是说必须事先建立好数据库在恢复备份之前，另外如果存在的数据库中已经有了内容，恢复将会添加备份进数据库而不是覆盖，你可以用“–add-drop-table”选项来设置表的恢复。
+
+## Database engine
+
+这里我简单介绍一下MySQL的引擎，在以后的文章中我会详细介绍不同的数据库引擎。
+
+MySQL主要使用两个数据库引擎，MyISAM和InnoDB。可以通过以下命令查看每个表使用的引擎。
+
+```
+SHOW TABLE STATUS FROM demodb;
+```
+
+MySQL默认使用InnoDB作为引擎，可以增加下面几个参数改变InnoDB设置
+
+```
+innodb_buffer_pool_size = 32M
+innodb_log_file_size = 8M
+innodb_thread_concurrency = 8
+innodb_file_per_table
+```
+
+好啦，现在所有的MySQL配置工作都完成啦，下面就可以使用了！！
