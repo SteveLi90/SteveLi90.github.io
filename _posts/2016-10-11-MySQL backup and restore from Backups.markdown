@@ -10,7 +10,7 @@ finished: true
 ---
 # MySQL backup and restore from Backups
 
-We have to backup data regularly for the security reason. There are a bunch of method to backup MySQL database, for some reason, the performance are not the same. Once the database crash or some fatal errors happen, backup is the only way to restore the data and reduce to the minimum loss. Generally speaking, we have three backup solutions:
+We have to backup data regularly for the security reason. There are a bunch of methods to backup MySQL database, for some reason, the performance are not the same. Once the database crash or some fatal errors happen, backup is the only way to restore the data and reduce the loss to the minimum. Generally speaking, we have three backup solutions:
 
 1, mysqldump + binary logs backup
 2, LVM snapshot + binary logs backup
@@ -81,10 +81,139 @@ mysql> DROP DATABASE hellodb; # delete DB
 ############ you have to implement at the offline ############
 mysql> SET sql_log_bin=0; # shutdown binary logs
 mysql> flush logs;
-[root@stu18 ~]# mysql -uroot -pmypass < /zhao/database_2013-08-13.sql # restore backup file
-[root@stu18 ~]# mysql -uroot -pmypass < /zhao/binlog_2013-08-13_19.sql # restore append backup file
-[root@stu18 ~]# mysql -uroot –pmypass # check the  result
+# mysql -uroot -pmypass < /zhao/database_2013-08-13.sql # restore backup file
+# mysql -uroot -pmypass < /zhao/binlog_2013-08-13_19.sql # restore append backup file
+# mysql -uroot –pmypass # check the  result
 mysql> SET sql_log_bin=1;  # set the new backup Position
 ```
 
-You have to re build the all indexes after this backup. and the backup file is large, so choose this solution as appropriate.
+You have to rebuild all the indexes after this backup. and the backup file is large, so choose this solution as appropriate.
+
+# LVM snapshot backup
+### solution conception
+1, LVM requires the data of mysql database have to store on the logical volumes.
+2, MySQL server have to be added read_only lock(mysql>FLUSH TABLES WITH READLOCK), you cannot quit server
+3, Use another session create the snapshot for the volume which data located.
+
+### backup strategy
+
+LVM snapshot full backup and binary logs append backup
+
+### precondition
+#### create logical volumes and mount logical volumes
+
+
+#### initialize mysql and redirect the data folder to /mydata/data
+
+```
+# cd /usr/local/mysql/
+# scripts/mysql_install_db --user=mysql --datadir=/mydata/data
+```
+
+#### Edit and check the my.cnf file, reboot service
+
+```
+# vim /etc/my.cnf
+datadir = /mydata/data
+sync_binlog=1 # add this statement, Once the transaction is commited, the computer will move the logs from the cache to the logs file. and flush the new logs file to the driver.
+# service mysqld start
+```
+
+### Process running
+#### Ensure transaction logs and data file have to locate in the same volume.
+
+```
+# ls /mydata/data/
+hellodb myclass mysql-bin.000003 stu18.magedu.com.err
+ibdata1 mysql mysql-bin.000004 stu18.magedu.com.pid
+ib_logfile0 mysql-bin.000001 mysql-bin.index student
+ib_logfile1 mysql-bin.000002 performance_schema test
+```
+
+the last two files are logs
+
+#### Add the global lock and flush logs
+
+```
+mysql> FLUSH TABLES WITH READ LOCK;
+mysql> FLUSH LOGS;
+```
+
+#### Check and save the binary log and the position of binary log at present(very important).
+
+```
+mysql> SHOW MASTER STATUS;
++------------------+----------+--------------+------------------+
+| File | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++------------------+----------+--------------+------------------+
+| mysql-bin.000004 | 187 | | |
++------------------+----------+--------------+------------------+
+# mysql -uroot -pmypass -e 'SHOW MASTER STATUS;' >/zhao/lvmback-2013-08-14/binlog.txt
+```
+
+#### Create the snapshot volume.
+
+```
+# lvcreate -L 100M -s -p r -n mydata-lvm /dev/vg1/mydata
+```
+
+#### switch to another session to release the lock
+
+```
+mysql> UNLOCK TABLES;
+```
+
+#### Backup the data
+
+```
+# cp -a * /backup/lvmback-2013-08-14/
+```
+
+#### Create the append backup
+
+```
+mysql> use hellodb; # assign the default database
+Database changed
+mysql> CREATE TABLE testtb (id int,name CHAR(10)); # create table
+Query OK, 0 rows affected (0.35 sec)
+mysql> INSERT INTO testtb VALUES (1,'tom'); # add data
+Query OK, 1 row affected (0.09 sec)
+# mysqlbinlog --start-position=187 mysql-bin.000004 > /zhao/lvmlogbin_2013-08-14/binlog.sql # append backup
+```
+
+#### emulate database crashed
+
+```
+# service mysqld stop
+# cd /mydata/data/
+# rm -rf *
+```
+
+#### restore data
+
+```
+# cp /zhao/lvmback-2013-08-14/* /mydata/data/ -a # full backup restore
+# cd /mydata/data/ # check the file
+# chown -R mysql.mysql * # change the permission
+# service mysqld start # start service
+# mysql -uroot –pmypass
+mysql> SHOW DATABASES;
+mysql> SET sql_log_bin=0 # close the log
+mysql> source /backup/lvmlogbin_2013-08-14/binlog.sql; # restore log
+mysql> SHOW TABLES; # check the tables
++-------------------+
+| Tables_in_hellodb |
++-------------------+
+| classes |
+| coc |
+| courses |
+| scores |
+| students |
+| teachers |
+| testtb |
+| toc |
++-------------------+
+mysql> SET sql_log_bin=1; # open the log
+```
+
+This method use the closed hot standby backup, so it is fast for backup and restore data.
