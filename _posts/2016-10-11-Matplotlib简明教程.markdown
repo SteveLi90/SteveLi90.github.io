@@ -76,8 +76,6 @@ plt.show() # 最后一定要用plt.show() 才能显示
 
 ![png](./Matplotlib/output_14_0.png)
 
-<p><img src="./Matplotlib/output_14_0.png" alt="png" />pic</p>
-
 ## 添加多图表在一个plot中
 
 ```python
