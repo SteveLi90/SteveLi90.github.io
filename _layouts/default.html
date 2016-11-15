@@ -1,34 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      
-  {% include head.html %}
+{% include header.html %}
 
-  {% if site.google-analytics %}
-  {% include google-analytics.html %}
-  {% endif %}
+<div class="container container-left">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            {% include sidebar.html %}
+        </div>
+        <div class="col-md-9">
+            {{ content }}
+        </div>
+    </div>
+</div>
 
-  {% if page.url == "/404.html" %}
-  <meta http-equiv="refresh" content="10; url={{ site.baseurl }}">
-  {% endif %}
-
-  </head>
-
-  <body>
-
-  {% include header.html %}
-
-  <div class="wrapper">
-        {{ content }}
-  </div>
-
-</body>
-
-<foot>
-
-    {% include footer.html %}
-    {% include foot.html %}
-
-</foot>
-
-</html>
+{% include footer.html %}

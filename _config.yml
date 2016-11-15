@@ -1,19 +1,39 @@
-# Site settings
-title: Dykin's Blog
-name: Dykin's Blog # your name
-email: awsjli00@gmail.com # your email address
-description: >
-    A Simple Jekyll Blog Theme. # this means to ignore newlines until "baseurl:"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://SteveLi90.github.io" # the base hostname & protocol for your site
-twitter_username: SteveLi90 # your Twitter username
-github_username: SteveLi90 # your Github username
-disqus_username: SteveLi90 # your disqus username
+# Jekyll configuration
 
-google-analytics: UA-75034651-1 # add it if you have one
+name: My blog
+description: A jekyll theme
 
-skillstree: true # turn on or off the skills tree in about page
+# url is currently only used only for the RSS feed in feed.xml
+url: https://scotte.github.io/jekyll-clean
 
-# Build settings
-permalink: none
+# baseurl will often be '', but for a project page on gh-pages, it needs to
+# be the project name.
+# *** IMPORTANT: If your local "jekyll serve" throws errors change this to '' or
+#     run it like so: jekyll serve --baseurl=''
+baseurl: /jekyll-clean
+
+# This can be '' to hide the Github nav button
+github: 'scotte/jekyll-clean'
+
+# Set this to your UA-# value, or '' to disable the block completely
+gaaccount: ''
+
+# The 'comments' setting enables comments. You'll need to select either
+# disqus or isso below to choose a comment system. Individual posts can
+# override 'comments' to disable on a post-by-post basis.
+comments: true
+
+# Set this to your public isso URL to enable comments via isso. Set to '' to disable isso.
+isso: ''
+
+# Set this to your disqus shortname to enable comments via disqus. Set to '' to disable disqus.
+disqus: ''
+
+permalink: /:year/:month/:title
+paginate: 3
+
+highlighter: rouge
 markdown: kramdown
+gems: ['jekyll-paginate']
+
+exclude: ['README.md', 'LICENSE']

@@ -4,8 +4,8 @@ title: "写在最前面"
 subtitle: "Data Science 学习笔记"
 date: 2016-10-07
 author: Dykin
-category: Preface
-tags: 
+category: Data Science
+tags: chinese luxun story
 finished: true
 ---
 
@@ -16,3 +16,6 @@ finished: true
 
 
 目前暂定如下几个分类：AI算法，数据挖掘，机器学习，深度学习，系统运维，数据库。希望以后可以增加分类。
+
+
+

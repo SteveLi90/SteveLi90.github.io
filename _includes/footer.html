@@ -1,30 +1,15 @@
-<footer class="site-footer">
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;{{ site.time | date: '%Y' }} {{ site.name }}. Powered by <a href="http://jekyllrb.com">Jekyll</a>, theme by <a href="https://github.com/scotte/jekyll-clean">Scott Emmons</a>
+            under
+            <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution</a></p>
+        </div>
+    </div>
+</div>
 
-  <div class="wrapper">
+{% include disqus-counts.html %}
+{% include analytics.html %}
 
-    <center>
-
-		<p><a class="link" href="{{ site.baseurl }}/archive/">Archive</a> /
-		<a class="link" href="{{ site.baseurl }}/category/">Category</a> /
-		<a class="link" href="{{ site.baseurl }}/tags/">Tags</a> /
-		<a class="link" href="{{ site.baseurl }}/about/">About</a> /
-		<a class="link" href="{{ site.baseurl }}/contact/">Contact</a>
-        </p>
-
-        <span><script>document.write(new Date().getFullYear());</script></span>
-        <span>&copy;</span>
-
-		<a class="link" href="{{ site.baseurl }}">{{ site.name }}</a>
-		<br>
-		<span>website &#64; <a class="link" href="https://steveli90.github.io" target="_blank"> Dykin</a> | </span>
-				<iframe
-			style="margin-left: 2px; margin-bottom:-5px;"
-			frameborder="0" scrolling="0" width="91px" height="20px"
-			src="https://ghbtns.com/github-btn.html?user=itisbenjamin&repo=Nice_Blog&type=star&count=true" >
-		</iframe>
-
-    </center>
-
-  </div>
-
-</footer>
+</body>
+</html>
