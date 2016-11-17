@@ -3,8 +3,7 @@ layout: default
 ---
 
 {% for post in paginator.posts limit:2 %}
-<section style="line-height: 1.1em ;max-height:11em ;">
-<div class="article" >
+<div class="article" style="line-height: 1.1em ;max-height:22em ; overflow: hidden; text-overflow: ellipsis;">
     <div class="well">
         <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.date | date: "%b %-d, %Y" }} - {{ post.title }}</a></h1>
         {% if site.comments and post.comments %}
@@ -19,10 +18,8 @@ layout: default
         </div>
     </div>
 </div>
-</section>
 {% endfor %}
 
-<section>
 <div class="pagination">
   {% if paginator.previous_page %}
       {% if paginator.previous_page == 1 %}
@@ -36,4 +33,3 @@ layout: default
     <a class="btn btn-default" href="{{ site.baseurl}}/page{{ paginator.next_page }}" class="next">Older</a>
   {% endif %}
 </div>
-</section>
