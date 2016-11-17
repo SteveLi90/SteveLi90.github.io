@@ -4,7 +4,7 @@ layout: default
 
 {% for post in paginator.posts limit:2 %}
 <div class="article">
-    <div class="well"  style="height: 200px; overflow: hidden; text-overflow: ellipsis;">
+    <div class="well"  style="height: 400px; overflow: hidden; text-overflow: ellipsis;">
         <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.date | date: "%b %-d, %Y" }} - {{ post.title }}</a></h1>
         {% if site.comments and post.comments %}
             {% if site.disqus != '' %}
