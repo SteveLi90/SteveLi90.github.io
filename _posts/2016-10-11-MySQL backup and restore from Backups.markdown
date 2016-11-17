@@ -5,7 +5,6 @@ date: 2016-10-11
 author: Dykin
 category: Database
 ---
-# MySQL backup and restore from Backups
 
 We have to backup data regularly for the security reason. There are a bunch of methods to backup MySQL database, for some reason, the performance are not the same. Once the database crash or some fatal errors happen, backup is the only way to restore the data and reduce the loss to the minimum. Generally speaking, we have three backup solutions:
 

@@ -1,16 +1,11 @@
 ---
 layout: post
 title: "NumPy简明教程"
-subtitle: "NumPy简明教程"
 date: 2016-10-07
 author: Dykin
 category: Data Science
-tags: Data Python Machine_Learning
-finished: true
----
-[TOC]
 
-#                        NumPy简明教程
+---
 
 NumPy是Python的一个线性代数库，在数据科学研究和学习中扮演很重要的角色，这篇文章将带大家学习一些常用的功能，并且教会大家如何参考NumPy API。
 
@@ -511,7 +506,7 @@ arr_length = arr2d.shape[1]
 
 for i in range(arr_length):
     arr2d[i] = i
-    
+
 arr2d
 
 array([[ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.],

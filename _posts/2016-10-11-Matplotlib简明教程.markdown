@@ -9,8 +9,6 @@ comments: true
 
 今天我们开始matplotlib的学习，现在是凌晨00：00，我争取在4：00 之前写完
 
-# Matplotlib简明教程
-
 ## 介绍
 
 Matplotlib是一个非常强大的数据可视化工具，我们之前学习了NumPy和pandas 和 Scipy， Scipy和pandas有一些数据图形化的功能，但是功能很有限而且不美观，很难达到企业级别的要求。而Matplotlib完全满足了这种要求，他拥有以下几个优点：

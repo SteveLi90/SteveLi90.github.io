@@ -1,15 +1,12 @@
 ---
 layout: post
 title: "写在MySQL前面"
-subtitle: ""
 date: 2016-10-10
 author: Dykin
 category: Preface
-tags: Database MySQL
-finished: true
+
 ---
 
-写在MySQL前面
 
 这是一些关于MySQL的文章，我没有长时间进行MySQL运维操作的经验，但是基本的一些经验还是有的，所以我主要是转载一些别人写的文章，再加上一些自己的实验和注解完成这一个系列。
 

@@ -1,15 +1,12 @@
 ---
 layout: post
 title: "SciPy简介"
-subtitle: "SciPy简介"
 date: 2016-10-10
 author: Dykin
 category: Data Science
-tags: Data Python Machine_Learning
-finished: true
+
 ---
 
-SciPy简介
 
 SciPy 是一个很强大的Python科学算法库，里面提供了很多科学计算方法和可视化的命令。这篇文章我不打算详细介绍SciPy，我只介绍几个我常用的结合NumPy可以发挥很大作用的功能，等年底有时间了我在好好研究一下完善教程。
 

@@ -6,7 +6,6 @@ author: Dykin
 category: Database
 ---
 
-# MySQL的安装及基本配置
 
 ## 安装MySQL
 
