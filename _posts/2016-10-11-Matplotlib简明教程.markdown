@@ -1,12 +1,10 @@
 ---
 layout: post
 title: "Matplotlib简明教程"
-subtitle: "Matplotlib简明教程"
 date: 2016-10-11
 author: Dykin
 category: Data Science
-tags: Data Python Machine_Learning
-finished: true
+comments: true
 ---
 
 今天我们开始matplotlib的学习，现在是凌晨00：00，我争取在4：00 之前写完
