@@ -75,7 +75,6 @@ plt.show() # 最后一定要用plt.show() 才能显示
 ```
 
 ![png](/images/Matplotlib/output_14_0.png)
-![My helpful screenshot]({{ site.url }}/images/Matplotlib/output_14_0.png)
 
 ## 添加多图表在一个plot中
 
@@ -88,7 +87,7 @@ plt.plot(y, x, 'g*-'); # 绿色实线，每个节点用 *
 ```
 
 
-![png](./Matplotlib/output_16_0.png)
+![png](/images/Matplotlib/output_16_0.png)
 
 # Matplotlib 面向对象方法
 Matplotlib 有很多面向对象API，所以我们可以增加figure对象
@@ -114,7 +113,7 @@ axes.set_title('Set Title')
     <matplotlib.text.Text at 0x111c85198>
 
 
-![png](./Matplotlib/output_20_1.png)
+![png](/images/Matplotlib/output_20_1.png)
 
 下面我们添加复合图表，代码有点复杂，但是如果写起来会发现很容易控制
 
@@ -139,7 +138,7 @@ axes2.set_title('Axes 2 Title');
 ```
 
 
-![png](./Matplotlib/output_22_0.png)
+![png](/images/Matplotlib/output_22_0.png)
 
 
 ## subplots()
@@ -158,7 +157,7 @@ axes.set_title('title');
 ```
 
 
-![png](./Matplotlib/output_24_0.png)
+![png](/images/Matplotlib/output_24_0.png)
 
 
 下面我们重复添加多图表的过程
@@ -169,7 +168,7 @@ fig, axes = plt.subplots(nrows=1, ncols=2)  # 一个fig 可以包含多个axes
 ```
 
 
-![png](./Matplotlib/output_26_0.png)
+![png](/images/Matplotlib/output_26_0.png)
 
 
 
@@ -215,7 +214,7 @@ plt.tight_layout()
 ```
 
 __
-![png](./Matplotlib/output_31_0.png)
+![png](/images/Matplotlib/output_31_0.png)
 
 ### 图表的大小，横纵比例与像素
 需要改变这三个 我们要了解两个重要的参数
@@ -241,7 +240,7 @@ axes.set_title('title');
 ```
 
 
-![png](./Matplotlib/output_36_0.png)
+![png](/images/Matplotlib/output_36_0.png)
 
 
 ### 保存图片
@@ -284,7 +283,7 @@ ax.legend()
 
 
 
-![png](./Matplotlib/output_50_1.png)
+![png](/images/Matplotlib/output_50_1.png)
 
 loc 参数可以定义图例位置
 
@@ -303,7 +302,7 @@ ax.legend(loc=0) # 让 matplotlib 自动决定最好的位置
 fig
 ```
 
-![png](./Matplotlib/output_52_0.png)
+![png](/images/Matplotlib/output_52_0.png)
 
 ### 设置颜色，线条长宽，线条类型
 
@@ -318,7 +317,7 @@ ax.plot(x, x**3, 'g--') # g 代表绿色，后面是代表虚线
 
     [<matplotlib.lines.Line2D at 0x111fae048>]
 
-![png](./Matplotlib/output_56_1.png)
+![png](/images/Matplotlib/output_56_1.png)
 
 这里有详细的说明： http://matplotlib.org/api/lines_api.html
 
@@ -335,7 +334,7 @@ ax.plot(x, x+3, color="#FF8C00")        # RGB hex code
 
     [<matplotlib.lines.Line2D at 0x112179390>]
 
-![png](./Matplotlib/output_59_1.png)
+![png](/images/Matplotlib/output_59_1.png)
 
 
 ### 线条和标记风格
@@ -373,7 +372,7 @@ ax.plot(x, x+16, color="purple", lw=1, ls='-', marker='s', markersize=8,
         markerfacecolor="yellow", markeredgewidth=3, markeredgecolor="green");
 ```
 
-![png](./Matplotlib/output_62_0.png)
+![png](/images/Matplotlib/output_62_0.png)
 
 ### 控制轴的外观
 这里讨论如何控制轴的尺寸和外观
@@ -399,7 +398,7 @@ axes[2].set_title("custom axes range");
 ```
 
 
-![png](./Matplotlib/output_67_0.png)
+![png](/images/Matplotlib/output_67_0.png)
 
 ## 特别绘图类型
 
@@ -411,7 +410,7 @@ plt.scatter(x,y)
 
     <matplotlib.collections.PathCollection at 0x1122be438>
 
-![png](./Matplotlib/output_69_1.png)
+![png](/images/Matplotlib/output_69_1.png)
 
 ```python
 from random import sample
@@ -425,7 +424,7 @@ plt.hist(data)   # 这个以后将会经常用到
              792. ,  887.5,  983. ]),
      <a list of 10 Patch objects>)
 
-![png](./Matplotlib/output_70_1.png)
+![png](/images/Matplotlib/output_70_1.png)
 
 ```python
 data = [np.random.normal(0, std, 100) for std in range(1, 4)]
@@ -434,7 +433,7 @@ data = [np.random.normal(0, std, 100) for std in range(1, 4)]
 plt.boxplot(data,vert=True,patch_artist=True);   
 ```
 
-![png](./Matplotlib/output_71_0.png)
+![png](/images/Matplotlib/output_71_0.png)
 
 最后介绍几个很好的matplotlib的学习资源，对大家很有帮助：
 
