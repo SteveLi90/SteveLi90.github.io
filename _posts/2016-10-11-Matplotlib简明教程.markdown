@@ -74,7 +74,8 @@ plt.title('String Title Here')
 plt.show() # 最后一定要用plt.show() 才能显示
 ```
 
-![png](./Matplotlib/output_14_0.png)
+![png](/images/Matplotlib/output_14_0.png)
+![My helpful screenshot]({{ site.url }}/images/Matplotlib/output_14_0.png)
 
 ## 添加多图表在一个plot中
 
