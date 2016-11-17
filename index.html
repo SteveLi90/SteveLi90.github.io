@@ -5,7 +5,8 @@ layout: default
 {% for post in paginator.posts limit:2 %}
 <div class="article">
     <div class="well"  style="height: 400px; overflow: hidden; text-overflow: ellipsis;">
-        <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.date | date: "%b %-d, %Y" }} - {{ post.title }}</a></h1>
+        <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a></h1>
+        <h6>{{ post.date | date: "%b %-d, %Y" }}<h6>
         {% if site.comments and post.comments %}
             {% if site.disqus != '' %}
             <p class="author"><a href="{{ site.baseurl }}{{ post.url }}/#disqus_thread" data-disqus-identifier="{{ post.url | slugify }}">Comments</a></p>
