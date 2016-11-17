@@ -1,12 +1,9 @@
 ---
 layout: post
 title: "MySQL的安装及基本配置"
-subtitle: ""
 date: 2016-10-10
 author: Dykin
 category: Database
-tags: Database MySQL
-finished: true
 ---
 
 # MySQL的安装及基本配置

@@ -1,12 +1,9 @@
 ---
 layout: post
 title: "广度优先搜索算法（Breadth-First-Search）"
-subtitle: "Breadth-First-Search"
 date: 2016-10-10
 author: Dykin
 category: AI
-tags: Algorithm
-finished: true
 ---
 广度优先搜索算法（BFS）
 今天我们来介绍一下一个简单的图形算法，广度优先搜索（BFS)。这是一种图形搜索算法，从根节点开始，横向的遍历所有节点。

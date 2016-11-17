@@ -1,12 +1,9 @@
 ---
 layout: post
 title: "MySQL backup and restore from Backups"
-subtitle: ""
 date: 2016-10-11
 author: Dykin
 category: Database
-tags: Database MySQL
-finished: true
 ---
 # MySQL backup and restore from Backups
 
@@ -509,7 +506,7 @@ restore data
 mysql> SET SQL_LOG_BIN=0; # shutdown binary logs file
 mysql> source /innobackup/all.sql # import data
 mysql> SET SQL_LOG_BIN=1; # start binary logs file
-mysql> select * from coc; 
+mysql> select * from coc;
 +----+---------+----------+
 | ID | ClassID | CourseID |
 +----+---------+----------+
