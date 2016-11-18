@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "2016-11-17-机器学习（一）：入门"
+title: "机器学习（一）：入门"
 date: 2016-11-17
 author: Dykin
 category: Machine Learning
