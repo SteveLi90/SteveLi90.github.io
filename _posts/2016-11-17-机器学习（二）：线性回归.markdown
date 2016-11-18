@@ -6,3 +6,81 @@ author: Dykin
 category: Machine Learning
 
 ---
+
+回归分析是一种预测性的建模技术，它研究的是因变量（目标）和自变量（预测器）之间的关系。这种技术通常用于预测分析，时间序列模型以及发现变量之间的因果关系。例如，司机的鲁莽驾驶与道路交通事故数量之间的关系，最好的研究方法就是回归。
+回归分析是建模和分析数据的重要工具。在这里，我们使用曲线/线来拟合这些数据点，在这种方式下，从曲线或线到数据点的距离差异最小。
+
+有关线性回归的研究及代码实现请参考我的另一篇文章。
+
+线性回归是最贴近生活的数据模型之一。
+
+### 简单的线性回归
+
+简单的线性回归公式如下：
+
+![figure 2.1](/images/ML2/1.PNG)
+
+从公式中我们可以看出，简单线性回归只有一个自变量x1，b1是自变量的系数，y是因变量。x1可能是连续型或者离散型的数据，所以我们需要通过x1找出最合适的系数b1从而得到关于因变量y的曲线。
+
+我们下面用一个例子来说明，这是一个关于工作经验与薪水之间关系的表格。分布如下图所示
+
+![figure 2.2](/images/ML2/2.PNG)  
+
+从charter上我们很容易看出这是符合一个线性回归的模型，下面我们就要做出回归的函数并且对未来数据进行预测。
+
+我们用上一节写过的模板来处理数据：
+
+```python
+# Importing the libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Importing the dataset
+dataset = pd.read_csv('Salary_Data.csv')
+X = dataset.iloc[:, :-1].values#除了最后一列的其他列
+y = dataset.iloc[:, 1].values #第二列
+
+# Splitting the dataset into the Training set and Test set
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+```
+
+一般Python的library会自动进行feature scaling，所以我们不需要自己动手。
+
+我们将数据按照4:1分为训练组和测试组两部分。每一组分别包含自变量和因变量
+
+![figure 2.3](/images/ML2/3.PNG)  
+
+下面我们需要做的是通过训练集的X_train与y_train 计算出符合训练集的曲线，然后将测试集的X_test 带入得到的曲线中，得到预测的结果y_pred，最后将预测结果y_pred与测试集中的y_test进行比较，看看是否符合分布，从而确定预测是否准确。
+
+```python
+# Fitting Simple LinearRegression to the training set
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train,y_train) # 通过train集找到曲线
+
+y_pred = regressor.predict(X_test)
+
+# visualising the Traning set results
+plt.scatter(X_train, y_train, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Salary vs Experience(Traning set)')
+plt.xlabel('Year of Experience')
+plt.ylabel('Salary')
+plt.show()
+```
+
+通过学习我们可以得到训练曲线
+
+![figure 2.4](/images/ML2/4.PNG)
+
+下面我们导入测试数据
+
+```python
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_train, regressor.predict(X_train), color = 'blue')
+plt.title('Salary vs Experience(Traning set)')
+plt.xlabel('Year of Experience')
+plt.ylabel('Salary')
+plt.show()
