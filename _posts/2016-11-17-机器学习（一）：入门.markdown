@@ -26,7 +26,7 @@ category: Machine Learning
 
 在以下数据集中Age和Salary就是独立变量，我们需要通过这两个独立变量预测是否会Purchase。所以Purchased就是非独立变量。
 
-![figure 1.1](/images/ML1/1.png)
+![figure 1.1](/images/ML1/1.PNG)
 
 ## 导入数据科学库（importing the library）
 
@@ -78,7 +78,7 @@ View(dataset)
 在数据集中可能会出现为空的数据，我们不能删除有空数据的列，这样会对我们机器学习的结果造成影响，在data science中我们可以用NaN代替空值，但是在ML中必须要求数据为numeric。所以我们可以用mean来代替空值。
 
 原数据集如图：
-![figure 1.2](/images/ML1/2.png)
+![figure 1.2](/images/ML1/2.PNG)
 
 代码如下：
 
@@ -102,7 +102,7 @@ X[:, 1:3] = imputer.transform(X[:, 1:3]) # 将imputer 应用到数据
 ```
 
 结果如下图所示：
-![figure 1.3](/images/ML1/3.png)
+![figure 1.3](/images/ML1/3.PNG)
 
 R 语言代码如下：
 
@@ -121,7 +121,7 @@ dataset$Salary = ifelse(is.na(dataset$Salary),
                         dataset$Salary)
 ```
 
-![figure 1.4](/images/ML1/4.png)
+![figure 1.4](/images/ML1/4.PNG)
 
 ## 分类数据（category data）
 
@@ -152,7 +152,7 @@ dataset$Purchased = factor(dataset$Purchased,
                            levels = c('No', 'Yes'),
                            labels = c(0, 1))
 ```
-![figure 1.6](/images/ML1/6.png)
+![figure 1.6](/images/ML1/6.PNG)
 
 ## 将数据集分类
 
@@ -174,3 +174,74 @@ training_set = subset(dataset, split == TRUE)
 test_set = subset(dataset, split == FALSE)
 
 ```
+
+## 特征缩放（feature scaling）
+
+这是对数据处理的一项很重要的步骤，在机器学习中，由于每个变量的范围不同，如果两个变量之间差距太大，会导致距离对结果产生影响。所以我们要对数据进行一定的标准化改变。最简单的方式是将数据缩放至[0.1]或者[-1,1]之间：
+![figure 1.7](/images/ML1/7.PNG)
+
+```python
+# Feature Scaling
+from sklearn.preprocessing import StandardScaler
+sc_X = StandardScaler()
+X_train = sc_X.fit_transform(X_train)
+X_test = sc_X.transform(X_test)
+```
+
+```R
+# Feature Scaling
+training_set[, 2:3] = scale(training_set[, 2:3])
+test_set[, 2:3] = scale(test_set[, 2:3])
+```
+
+![figure 1.8](/images/ML1/8.PNG)
+
+## 建立模板
+
+以上就是几个基本的准备工作的步骤，我们可以建立一个样板，对数据进行预处理，然后在进行机器学习，以下是Python和R的样板：
+
+```python
+# Data Preprocessing template
+
+# Importing the libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Importing the dataset
+dataset = pd.read_csv('Data.csv')
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 3].values
+
+# Splitting the dataset into the Training set and Test set
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+# Feature Scaling
+from sklearn.preprocessing import StandardScaler
+sc_X = StandardScaler()
+X_train = sc_X.fit_transform(X_train)
+X_test = sc_X.transform(X_test)
+```
+
+```R
+# Data Preprocessing template
+
+# Importing the dataset
+dataset = read.csv('Data.csv')
+# dataset = dataset[, 2:3]
+
+# Splitting the dataset into the Training set and Test set
+# install.packages('caTools')
+library(caTools)
+set.seed(123)
+split = sample.split(dataset$Purchased, SplitRatio = 0.8)
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
+# Feature Scaling
+training_set[, 2:3] = scale(training_set[, 2:3])
+test_set[, 2:3] = scale(test_set[, 2:3])
+```
+
+下面我们就开始真正的机器学习啦！！
