@@ -17,7 +17,7 @@ category: Machine Learning
 
 编程环境的话依个人喜好而定，我也不会推荐任何IDE，但是我会贴出代码。
 
-## 获得数据集（get the dataset）
+#### 获得数据集（get the dataset）
 
 在做机器学习之前需要有结构化的数据（structure data）才行。网上有很多网站可以提供这些数据。我也会给大家提供一些简单的数据集。
 
@@ -28,7 +28,7 @@ category: Machine Learning
 
 ![figure 1.1](/images/ML1/1.PNG)
 
-## 导入数据科学库（importing the library）
+#### 导入数据科学库（importing the library）
 
 下面我们要准备Python的编程环境，在Python中有很多数据科学的库（见我的Data Scienc系列），我们需要的主要是以下三个库：
 
@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 ```
 
-## 导入数据集（importing dataset）
+#### 导入数据集（importing dataset）
 
 在导入数据之前你需要设置working directory, 就是将代码与数据保存在同一文件夹下。
 
@@ -73,7 +73,8 @@ setwd("/Users/ML1/")
 dataset = read_csv('Data.csv')
 View(dataset)
 ```
-## 处理空数据（Missing Data）
+
+#### 处理空数据（Missing Data）
 
 在数据集中可能会出现为空的数据，我们不能删除有空数据的列，这样会对我们机器学习的结果造成影响，在data science中我们可以用NaN代替空值，但是在ML中必须要求数据为numeric。所以我们可以用mean来代替空值。
 
@@ -123,7 +124,7 @@ dataset$Salary = ifelse(is.na(dataset$Salary),
 
 ![figure 1.4](/images/ML1/4.PNG)
 
-## 分类数据（category data）
+#### 分类数据（category data）
 
 在对数据集进行处理时候我们会遇到一些包含同类别的数据（如图二中的country）。这样的数据是非numerical的数据，所以我们可以用数字来代替，比如不同的国家我们可以用1,2,3区分不同国家，但是这样会出现一个比较严重的问题。就是国家之间的地位是相同的，但是数字有顺序大小之分。所以我们用另一种方法，就是将不同的类别（如不同国家）另外分为一个列，属于这个国家的设置为1，不属于的设置为0.：
 
@@ -138,8 +139,8 @@ X = onehotencoder.fit_transform(X).toarray()
 # Encoding the Dependent Variable
 labelencoder_y = LabelEncoder()
 y = labelencoder_y.fit_transform(y)
-````
-![figure 1.5](/images/ML1/5.png)
+```
+![figure 1.5](/images/ML1/5.PNG)
 
 在R语言中不需要特别将每一类别分为一列，这比Python要简单一些。因为每一列用vector来表示，所以可以接受不同的大小。
 
@@ -154,7 +155,7 @@ dataset$Purchased = factor(dataset$Purchased,
 ```
 ![figure 1.6](/images/ML1/6.PNG)
 
-## 将数据集分类
+#### 将数据集分类
 
 当数据集准备完成之后，我们需要将数据集进行分类，将独立变量和依赖变量分为训练集和测试集。训练集与测试集的比例一般是用4:1。
 
