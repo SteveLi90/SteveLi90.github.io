@@ -73,7 +73,7 @@ plt.show()
 
 通过学习我们可以得到训练曲线
 
-![figure 2.4](/images/ML2/4.PNG)
+![figure 2.4](/images/ML2/4.png)
 
 下面我们导入测试数据
 
@@ -84,3 +84,18 @@ plt.title('Salary vs Experience(Traning set)')
 plt.xlabel('Year of Experience')
 plt.ylabel('Salary')
 plt.show()
+```
+
+![figure 2.5](/images/ML2/5.png)
+
+这里需要注意两点，第一，在导入测试集时我们依然使用训练集得到的曲线，所以我们的plot函数中参数不便，当然如果你用测试集的数据应该也会得到相同的曲线。
+第二有的人觉得既然需要预测数据应该将y_test 替换成 y_pred。 其实不需要这样的。因为我们y_pred 上的点应该都是和曲线高度重合的，如图：
+
+![figure 2.6](/images/ML2/6.png)
+
+这样一个简单线性回归的机器学习功能就完成啦~~最后我贴出R语言实现的步骤。
+
+```{r}
+
+
+```
