@@ -1,0 +1,31 @@
+---
+layout: post
+title: "回归分析总结"
+date: 2016-11-18
+author: Dykin
+category: Machine Learning
+---
+
+回归分析是一种很重要的预测建模技术。主要是研究自变量与因变量之间的因果关系。本文将会从数学角度与代码角度分析不同类型的回归。
+
+### 线性回归（Linear Regression）
+
+线性回归是最基础的一种回归模型，从
+
+### 逻辑回归（Logistic Regression）
+
+### 多项式回归（Polynomial Regression）
+
+### 逐步回归（Stepwise Regression）
+
+### 岭回归（Ridge Regression）
+
+### 套索回归（Lasso Regression）
+
+### 弹性网（Elastic net）
+
+
+
+
+
+本文参考了Sunil Ray的[7 Types of Regression Techniques you should know!](https://www.analyticsvidhya.com/blog/2015/08/comprehensive-guide-regression/)

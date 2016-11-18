@@ -143,3 +143,9 @@ ggplot() +
   ylab('Salary')
 
 ```
+
+### 多重线性回归（Multiple Linear Regression）
+
+多重线性回归将会不只有一个自变量，并且每个自变量拥有自己的系数且符合线性回归。
+
+![figure 2.7](/images/ML2/7.png)
