@@ -148,7 +148,7 @@ ggplot() +
 
 多重线性回归将会不只有一个自变量，并且每个自变量拥有自己的系数且符合线性回归。
 
-![figure 2.7](/images/ML2/7.png)
+![figure 2.7](/images/ML2/7.PNG)
 
 在建立多重线性回归之前，有这么几个前提必须要注意一下，这些有助于你判断数据是否适合使用多重线性回归：
 1， 线性（linearity）
@@ -201,7 +201,7 @@ ggplot() +
 
 如何计算P值（p-value）
 
-![figure 2.8](/images/ML2/8.png)
+![figure 2.8](/images/ML2/8.PNG)
 
 假定有两组人群，一组x=0，另一组x=1。从两组中各随机抽取2个个体，测量Y
 的值，如图所示，看看这两组的Y是否相同？
@@ -222,7 +222,7 @@ ggplot() +
 
 今天我们使用一个多变量对商业profit影响的数据集。
 
-![figure 2.9](/images/ML2/9.png)
+![figure 2.9](/images/ML2/9.PNG)
 
 在此数据集中，我们确定前四个变量（R&D Speed, Administration, Marketing Speed, State）为自变量。最后一个profit为因变量。
 
@@ -249,7 +249,7 @@ X = onehotencoder.fit_transform(X).toarray()
 X = X[:, 1:] #从1 开始，并非0
 ```
 
-![figure 2.10](/images/ML2/10.png)
+![figure 2.10](/images/ML2/10.PNG)
 
 将数据集分为训练集和测试集，我们选择test size为0.2（4：1）
 
@@ -274,7 +274,7 @@ y_pred = regressor.predict(X_test)
 
 我们比较一下预测结果（y_pred）和实际结果(y_test)中的差异
 
-![figure 2.11](/images/ML2/11.png)
+![figure 2.11](/images/ML2/11.PNG)
 
 ```python
 plt.scatter(np.arange(10),y_test, color = 'red',label='y_test')
@@ -283,7 +283,7 @@ plt.legend(loc=2);
 plt.show()
 ```
 
-![figure 2.12](/images/ML2/12.png)
+![figure 2.12](/images/ML2/12.PNG)
 
 其实很多结果还是很接近的。
 
@@ -318,7 +318,7 @@ y_pred = predict(regressor, newdata = test_set)
 
 我们执行一下summary(regressor) 来看看这个factor的结构：
 
-![figure 2.13](/images/ML2/13.png)
+![figure 2.13](/images/ML2/13.PNG)
 
 首先，R语言自动对虚拟变量进行了优化，所以我们不需要担心虚拟变量陷阱的问题。
 
