@@ -499,6 +499,9 @@ summaryss(poly_reg)
 我们可以看到模型的系数之间的关系
 
 
+### 支持向量回归（support vector regression）
+
+支持向量回归是属于支持向量机（support vector machine）的一种
 
 
 
