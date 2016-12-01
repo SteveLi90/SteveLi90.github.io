@@ -1,39 +1,26 @@
-# Jekyll configuration
+title: John Smith
+description: My Personal Blog
+author: John Smith
+logo: /hcz-jekyll-blog/static/img/avatar.png
+github: https://github.com/ashutosh2k12
+about: Freelance developer
 
-name: Dykin's blog
-description: This is my technical home page
+baseurl: "https://codeasashu.github.io/hcz-jekyll-blog"
+url: "https://codeasashu.github.io/hcz-jekyll-blog"
 
-# url is currently only used only for the RSS feed in feed.xml
-url: https://steveli90.github.io/
+disqus_shortname: aboutashu
+google_analytics: UA-72862926-1
 
-# baseurl will often be '', but for a project page on gh-pages, it needs to
-# be the project name.
-# *** IMPORTANT: If your local "jekyll serve" throws errors change this to '' or
-#     run it like so: jekyll serve --baseurl=''
-baseurl:
+share:
+  twitter_username: \#
+  fb_appid: 000000000000
 
-# This can be '' to hide the Github nav button
-github: 'steveli90'
 
-# Set this to your UA-# value, or '' to disable the block completely
-gaaccount: ''
+enableTags: true
+tagarray: []
 
-# The 'comments' setting enables comments. You'll need to select either
-# disqus or isso below to choose a comment system. Individual posts can
-# override 'comments' to disable on a post-by-post basis.
-comments: true
-
-# Set this to your public isso URL to enable comments via isso. Set to '' to disable isso.
-isso: ''
-
-# Set this to your disqus shortname to enable comments via disqus. Set to '' to disable disqus.
-disqus: ''
-
-permalink: /:year/:month/:title
-paginate: 3
-
-highlighter: rouge
+paginate: 20
+per_page: 20
+paginate_path: "/page:num/"
 markdown: kramdown
-gems: ['jekyll-paginate']
-
-exclude: ['README.md', 'LICENSE']
+gems: [jekyll-paginate, jekyll-gist]
