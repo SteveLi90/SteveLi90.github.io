@@ -222,6 +222,23 @@ public class SLR {
 
 多项式回归有个很重要的因素就是指数（degree）。如果我们发现数据的分布大致是一条曲线，那么很可能符合多项式回归，但是我们不知道degree是多少。所以我们只能一个个去试，直到找到最拟合分布的degree。这个过程我们可以交给数据科学软件完成。需要注意的是，如果degree选择过大的话可能会导致函数过于拟合， 意味着对数据或者函数未来的发展很难预测，也许指向不同的方向。
 
+这个回归的计算需要用到矩阵数据结构。有的编程语言可能需要导入外库。
+
+![figure 8](/images/reg/8.PNG)
+
+我们对所有拟合这个公式的点，用矩阵表示他们的关系
+
+![figure 9](/images/reg/9.PNG)
+
+如果用矩阵符号表示：
+
+![figure 10](/images/reg/10.PNG)
+
+多项式回归向量的系数（使用最小二乘法）：
+
+![figure 11](/images/reg/11.PNG)
+
+
 Java 和 Python 代码如下：
 
 ```python
@@ -290,7 +307,6 @@ public class PR {
 
 	public double R2() {
 		return 1.0 - SSE/SST;
-
 	}
 
 	public double predict(double x) {
@@ -318,7 +334,6 @@ public class PR {
         }
         return s + "  (R^2 = " + String.format("%.3f", R2()) + ")";
     }
-
 
 }
 
