@@ -1,0 +1,501 @@
+hadoop环境搭建
+
+虚拟机单机环境
+
+         32位的linux [www.19cr.com][红帽企业Linux.6.5.服务器版].rhel-server-6.5-i386-dvd.iso
+
+         32位的jdk    jdk-8u111-linux-i586.tar.gz
+
+1、linux环境安装
+
+2、安装jdk
+
+/*给jdk 文件赋权限，使其可以被当前用户操作 sudo chmod u+x 文件名*/
+
+i.解压jdk 压缩包进行安装
+
+--解压：tar -xzvf jdk-8u111-linux-i586.tar.gz
+
+--          rpm -ivh xxx.rpm
+
+ii.jdk的安装目录
+
+--/usr/java/jdk1.8.0_111/
+
+iii.编辑 profile文件
+
+-- vi /etc/profile
+
+--  在最后添加 JAVA_HOME=/usr/java/jdk1.8.0_111/
+
+执行 source /etc/profile 使修改生效
+
+执行 echo $JAVA_HOME 打印java路径
+
+运行java -version、javac -version 检查jdk是否正确安装 两个显示的版本要一样的
+
+3、设置免密码登录 SSH
+
+i.安装SSH秘钥
+
+--ssh-keygen -t rsa
+
+--执行这个命令后 会自动生成一个 .SSH的目录 在这个目录下 就是我们公钥和私钥
+
+--id_rsa.pub 是公钥
+
+[root@wlh ~]# cd .ssh/
+
+[root@wlh .ssh]# cat id_rsa.pub >> authorized_keys
+
+[root@wlh .ssh]# ll
+
+total 12
+
+-rw-r--r--. 1 root root  390 Nov 28 08:39 authorized_keys
+
+-rw-------. 1 root root 1675 Nov 28 08:33 id_rsa
+
+-rw-r--r--. 1 root root  390 Nov 28 08:33 id_rsa.pub
+
+[root@wlh ~]# ssh wlh  --ssh后面跟的是 你要远程的服务器的主机名或地址
+
+4、hadoop配置
+
+i.解压 tar zxf hadoop-3.0.0-alpha1.tar.gz
+
+ii.配置hadoop_home环境变量
+
+--pwd显示当前路径 /opt/hadoop-3.0.0-alpha1
+
+--执行 vi /etc/profile
+
+--在文件最后添加 HADOOP_HOME=/opt/hadoop-3.0.0-alpha1
+
+--空一行
+
+--PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$PATH
+
+iii.执行 source /etc/profile 使修改生效
+
+配置hadoop
+
+--HADOOP 的配置文件存放在/opt/hadoop-3.0.0-alpha1/etc/hadoop目录下
+
+--cd /opt/hadoop-3.0.0-alpha1/etc/hadoop
+
+--需要配置以下五个文件
+
+   core-site.xml
+
+   hdfs-site.xml
+
+   yarn-site.xml
+
+   mapred-site.xml
+
+   slaves
+
+配置core-site.xml文件
+
+/*--在 <configuration> </configuration> 键值对中间写*/
+
+--配置文件系统，hdfs的端口
+
+<property>
+
+<name>fs.default.name</name>
+
+<value>hdfs://linux主机名:端口</value>--例如<value>hdfs://wlh:9000</value>
+
+</property>
+
+--配置一个目录
+
+<property>
+
+<name>hadoop.tmp.dir</name>
+
+<value>/opt/hadoop-3.0.0-alpha1/current/tmp</value>--要手动创建这个目录
+
+</property>
+
+--分布式文件系统的垃圾箱(trash)。。。
+
+<property>
+
+<name>fs.trash.interval</name>
+
+<value>4320</value>--4320这个数是按分钟算的，3分钟，3分钟会清理一次
+
+</property>
+
+
+
+配置hdfs-site.xml文件
+
+/*--在 <configuration> </configuration> 键值对中间写*/
+
+--配置分布式文件系统
+
+--配置namenode位置
+
+<property>
+
+<name>dfs.namenode.dir</name>
+
+<value>/opt/hadoop-3.0.0-alpha1/current/data</value>--要手动创建这个目录
+
+</property>
+
+--配置datanode的信息，
+
+/*这个实际上是要在datanode上配置的不用再namenode上配置，但现在配置的是伪分布式环境
+
+namenode和datanode在同一台机器上。*/
+
+<property>
+
+<name>dfs.datanode.dir</name>
+
+<value>/opt/hadoop-3.0.0-alpha1/current/data</value>--要手动创建这个目录
+
+</property>
+
+--配置副本的数量，每个块有几个副本，伪分布式只有一个节点 ，所以value是1
+
+<property>
+
+<name>dfs.replication</name>
+
+<value>1</value>
+
+</property>
+
+--配置hdfs是否启用web
+
+<property>
+
+<name>dfs.webhdfs.enabled</name>
+
+<value>true</value>
+
+</property>
+
+--配置HDFS的用户组和权限
+
+<property>
+
+<name>dfs.permissions.superusergroup</name>
+
+<value>staff</value>--staff是hdfsd的用户组
+
+</property>
+
+--不开启权限
+
+<property>
+
+<name>dfs.permissions.senabled</name>
+
+<value>false</value>
+
+</property>*/
+
+配置yarn-site.xml
+
+/*在 <configuration> </configuration> 键值对中间写*/
+
+<property>
+
+<name>yarn.resourcemanager.hostname</name>
+
+<value>wlh</value>--运行resourcemanager的机器的主机名
+
+</property>
+
+<property>
+
+<name>yarn.nodemanager.aux.services</name>
+
+<value>mapreduce_shuffle</value>
+
+</property>
+
+<property>
+
+<name>yarn.nodemanager.aux.services.mapreduce.shuffle.class</name>
+
+<value>org.apache.hadoop.mapred.ShuffleHandler</value>
+
+</property>
+
+--resourcemanager的端口
+
+<property>
+
+<name>yarn.resourcemanager.address</name>
+
+<value>wlh:18040</value>--主机名+端口号 或者 IP地址+端口号
+
+</property>
+
+--resourcemanager的调度器端口
+
+<property>
+
+<name>yarn.resourcemanager.scheduler.address</name>
+
+<value>wlh:18030</value>--所有的端口号都可以任意指定，但是不能重复
+
+</property>
+
+<property>
+
+<name>yarn.resourcemanager.resource-tracker.address</name>
+
+<value>wlh:18025</value>--主机名+端口号 或者 IP地址+端口号
+
+</property>
+
+<property>
+
+<name>yarn.resourcemanager.admin.address</name>
+
+<value>wlh:18141<value>--主机名+端口号 或者 IP地址+端口号
+
+</property>
+
+<property>
+
+<name>yarn.resourcemanager.webapp.address</name>
+
+<value>wlh:18888<value>--主机名+端口号 或者 IP地址+端口号
+
+</property>
+
+--yarn中的日志是否启用
+
+<property>
+
+<name>yarn.log.aggregation.retain.seconds</name>
+
+<value>86400<value>
+
+</property>
+
+<property>
+
+<name>yarn.log.aggregation.retain.check.interval.seconds</name>
+
+<value>86400<value>
+
+</property>
+
+--nodemanager
+
+<property>
+
+<name>yarn.nodemanager.remote.app.log.dir</name>
+
+<value>/tmp/logs<value>
+
+</property>
+
+<property>
+
+<name>yarn.nodemanager.remote.app.log.dir.suffix</name>
+
+<value>logs<value>
+
+</property>
+
+配置mapred-site.xml
+
+--目录中没有mapred-site.xml.文件 只有mapred-site.xml.template 所以复制mapred-site.xml.template 文件重命名
+
+cp mapred-site.xml.template mapred-site.xml
+
+配置文件 mapred-site.xml
+
+/*--在 <configuration> </configuration> 键值对中间写*/
+
+--mapreduce基于哪个框架
+
+<property>
+
+<name>mapreduce.framework.name</name>
+
+<value>yarn<value>
+
+</property>
+
+--通信的端口
+
+<property>
+
+<name>mapreduce.jobtracker.http.address</name>
+
+<value>wlh:5030<value>
+
+</property>
+
+--job history
+
+<property>
+
+<name>mapreduce.jobhistory.address</name>
+
+<value>wlh:10020<value>
+
+</property>
+
+<property>
+
+<name>mapreduce.jobhistory.webapp.address</name>
+
+<value>wlh:19888<value>
+
+</property>
+
+<property>
+
+<name>mapreduce.jobhistory.done.dir</name>--已完成的日志目录
+
+<value>/jobhistroy/done<value>
+
+</property>
+
+<property>
+
+<name>mapreduce.intermediate.done.dir</name>--中间情况日志目录
+
+<value>/jobhistroy/done_intermediate<value>
+
+</property>
+
+<property>
+
+<name>mapreduce.job.ubertask.enable</name>--中间情况日志目录
+
+<value>true<value>
+
+</property>
+
+
+
+配置slaves
+
+--datanode nodemanager在哪个机器上运行
+
+--在文件中写主机名即可
+
+[root@wlh hadoop]# vi slaves
+
+wlh
+
+
+
+5、格式化分布式文件系统(HDFS)
+
+[root@wlh hadoop]# hdfs namenode -format
+
+ERROR: JAVA_HOME is not set and could not be found.
+
+原因 少配置了一个文件 hadoop-env.sh 配置java_home
+
+[root@wlh hadoop]# vi hadoop-env.sh
+
+填写java_home
+
+[root@wlh hadoop]# hdfs namenode -format
+
+执行这个命令后出现的语句中有这一行为成功
+
+2016-11-30 00:44:56,889 INFO common.Storage: Storage directory /opt/hadoop-3.0.0-alpha1/current/tmp/dfs/name has been successfully formatted.
+
+6、启动HADOOP集群
+
+在 /opt/hadoop-3.0.0-alpha1/sbin目录下执行star-all.sh文件
+
+[root@wlh sbin]# /opt/hadoop-3.0.0-alpha1/sbin/start-all.sh
+
+This script is deprecated. Use start-dfs.sh and start-yarn.sh instead.
+
+一个一个启动即可
+
+[root@wlh sbin]# /opt/hadoop-3.0.0-alpha1/sbin/start-dfs.sh
+
+[root@wlh sbin]# /opt/hadoop-3.0.0-alpha1/sbin/start-yarn.sh
+
+7、验证HADOOP集群
+
+第一种方式
+
+[root@wlh sbin]# jps
+
+11602 ResourceManager
+
+11141 NameNode
+
+11861 NodeManager
+
+12038 Jps
+
+11227 DataNode
+
+11406 SecondaryNameNode
+
+--jps 显示当前系统中java的进程
+
+第二种方式
+
+通过端口来查看
+
+[root@wlh ~]# ifconfig
+
+eth0      Link encap:Ethernet  HWaddr 00:0C:29:F8:B0:41
+
+          inet addr:192.168.128.129  Bcast:192.168.128.255  Mask:255.255.255.0
+
+-端口 50070 查看HDFS的运行情况
+
+--192.168.128.129:50070
+
+-端口 18088 查看HDFS的运行情况
+
+--192.168.128.129:18088
+
+8、关闭防火墙
+
+[root@wlh ~]# service iptables stop
+
+iptables: Setting chains to policy ACCEPT: filter          [  OK  ]
+
+iptables: Flushing firewall rules:                         [  OK  ]
+
+iptables: Unloading modules:                               [  OK  ]
+
+遇到的问题：
+
+50070端口访问失败 ，已关闭防火墙。(18088端口可以访问)
+
+解决：
+
+i.查看日志
+
+$HADOOP_HOME/logs/下面的与NameNode相关的日志，查看日志后没有发现ERROR信息；
+
+ii.检查50070端口是否启动
+
+[root@wlh ~]# netstat  -anp | grep 50070
+
+50070端口没有启动
+
+启动 dfs
+
+PS ：遇到个奇葩情况
+
+使用sh执行的时候 会报一些错误
+
+使用bash执行的时候没有

@@ -1,21 +1,59 @@
-## HCZ Material theme
+## Voyager
 
-This is a simple personal material theme, best suited for personal authors, programmars, bloggers. 
+Just another jekyll theme. Demo: <http://redvi.github.io/voyager>
 
-### Demo
-* [http://aboutashu.com/hcz-jekyll-blog](http://aboutashu.com/hcz-jekyll-blog/)
+### Feathures:
 
-#### Feature
+All HTML files are compressed (see `_layouts/compress.html`).
 
-* Sitemap and XML Feed
-* Projects and tags
-* Paginations in homepage
-* Posts under category
-* Related Posts
-* Highlight pre
-* Next & Previous Post
-* Disqus comment
+**Post**
 
-#### Screenshot
+All post settings can be changed. Example:
 
-![Screenshot Home Page](https://raw.githubusercontent.com/ashutosh2k12/jekyllthemes/master/thumbnails/hcz-material.png  "Screenshot Home Page")
+```
+---
+layout: post
+bg: '2016/background.jpg'
+title: "Post Heading"
+crawlertitle: "page title"
+summary: "post description"
+date: 2016-06-29
+tags : ['front-end']
+slug: post-url
+author: "Author"
+categories: posts
+---
+```
+
+`bg` is a path to background of your article. By default backgrounds are placed in the `assets/images` directory.
+
+**Page**
+
+If page contains `active` tag, it will be show on site menu.
+
+```
+---
+layout: page
+title: "About"
+permalink: /about/
+active: about
+---
+```
+
+**Archive**
+
+Archive page is sorting posts by tags. No more than one tag in one post.
+
+Good:
+
+```
+tags : ['front-end']
+```
+
+Bad:
+
+```
+tags : ['front-end', 'jekyll']
+```
+
+Don't forget to change `_config.yml`.
