@@ -1,44 +1,39 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+# Jekyll configuration
 
-# Site settings
-title: Your awesome title
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-lang: "en"
-url: "http://localhost:4000" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
-disqus_username:
+name: Dykin's blog
+description: This is my technical home page
 
-# Build settings
+# url is currently only used only for the RSS feed in feed.xml
+url: https://steveli90.github.io/
+
+# baseurl will often be '', but for a project page on gh-pages, it needs to
+# be the project name.
+# *** IMPORTANT: If your local "jekyll serve" throws errors change this to '' or
+#     run it like so: jekyll serve --baseurl=''
+baseurl:
+
+# This can be '' to hide the Github nav button
+github: 'steveli90'
+
+# Set this to your UA-# value, or '' to disable the block completely
+gaaccount: ''
+
+# The 'comments' setting enables comments. You'll need to select either
+# disqus or isso below to choose a comment system. Individual posts can
+# override 'comments' to disable on a post-by-post basis.
+comments: true
+
+# Set this to your public isso URL to enable comments via isso. Set to '' to disable isso.
+isso: ''
+
+# Set this to your disqus shortname to enable comments via disqus. Set to '' to disable disqus.
+disqus: ''
+
+permalink: /:year/:month/:title
+paginate: 3
+
+highlighter: rouge
 markdown: kramdown
-relative_permalinks: false
-permalink: /:categories/:title/
+gems: ['jekyll-paginate']
 
-# Posts settings
-future: true
-safe: false
-lsi: false
-excerpt_separator: "\n\n"
-
-
-compress_html:
-  comments: ["<!-- ", " -->"]
-  clippings: all
-  endings: all
-
-
-sass:
-  sass_dir: assets/_sass
-
-
-images: '/assets/images'
+exclude: ['README.md', 'LICENSE']
